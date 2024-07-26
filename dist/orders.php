@@ -20,6 +20,8 @@ include("connection.php");
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Bootstrap Font Icon CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -73,6 +75,7 @@ include("connection.php");
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Offene Bestellungen</li>
                         </ol>
+                        <p><a class="btn btn-primary" href="index.html"><i class="bi bi-cart-plus"></i> Neue Bestellung</a></p>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
@@ -86,10 +89,9 @@ include("connection.php");
                                             <th>Erstelldatum</th>
                                             <th>Erstellt von</th>
                                             <th>Kunde</th>
+                                            <th>Bestellung</th>
                                             <th>Preis</th>
-                                            <th>Anzahl Harasse</th>
-                                            <th>Lieferstatus</th>
-                                            <th>Bezahlstatus</th>
+                                            <th>Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -99,23 +101,132 @@ include("connection.php");
 
                                         while ($result = mysqli_fetch_assoc($query))
                                         {
+                                            $res_id = $result['id'];
                                             $res_date = $result['date'];
-                                            $res_createdByUser = $result['createdByUser'];
-                                            $res_client = $result['client'];
+                                            $res_userId = $result['userId'];
+                                            $res_clientId = $result['clientId'];
                                             $res_price = $result['price'];
                                             $res_numCrates = $result['numCrates'];
-                                            $res_crateStatus = $result['crateStatus'];
-                                            $res_deliveryStatus = $result['deliveryStatus'];
-                                            $res_paymentStatus = $result['paymentStatus'];
+                                            $res_crateStatusId = $result['crateStatusId'];
+                                            $res_deliveryStatusId = $result['deliveryStatusId'];
+                                            $res_paymentStatusId = $result['paymentStatusId'];
+                                            $res_bankaccountStatusId = $result['bankaccountStatusId'];
 
                                             echo "<tr>\n";
                                             echo "    <td>$res_date</td>\n";
-                                            echo "    <td>$res_createdByUser</td>\n";
-                                            echo "    <td>$res_client</td>\n";
-                                            echo "    <td>$res_price</td>\n";
-                                            echo "    <td>$res_numCrates</td>\n";
-                                            echo "    <td>$res_deliveryStatus</td>\n";
-                                            echo "    <td>$res_paymentStatus</td>\n";
+
+                                            // get name for userId
+                                            $sqlUser = "SELECT * FROM users WHERE id = $res_userId";
+                                            $queryUser = mysqli_query($conn, $sqlUser) or die("Could not run SQL query.");
+                                            $resultUser = mysqli_fetch_assoc($queryUser);
+                                            $userName = $resultUser['prename'];
+                                            echo "    <td>$userName</td>\n";
+
+                                            // get name for clientId
+                                            $sqlClient = "SELECT * FROM clients WHERE id = $res_clientId";
+                                            $queryClient = mysqli_query($conn, $sqlClient) or die("Could not run SQL query.");
+                                            $resultClient = mysqli_fetch_assoc($queryClient);
+                                            $clientName = $resultClient['prename']." ".$resultClient['lastname'];
+                                            echo "    <td>$clientName</td>\n";
+
+                                            // get all the order items that belong to that order
+                                            $sql = "SELECT * FROM orderItems WHERE orderId = $res_id";
+                                            $query = mysqli_query($conn, $sql) or die("Could not run SQL query.");
+
+                                            echo "    <td>\n";
+                                            echo "        <ul style=\"list-style-type:none;\">\n";
+
+                                            while ($result = mysqli_fetch_assoc($query))
+                                            {
+                                                $orderItems_beerId = $result['beerId'];
+                                                $orderItems_amount = $result['amount'];
+                                                $orderItems_containerId = $result['containerId'];
+
+                                                // get name for beerId
+                                                $sqlBeer = "SELECT * FROM beers WHERE id = $orderItems_beerId";
+                                                $queryBeer = mysqli_query($conn, $sqlBeer) or die("Could not run SQL query.");
+                                                $resultBeer = mysqli_fetch_assoc($queryBeer);
+                                                $beerType = $resultBeer['type'];
+
+                                                $container = ($orderItems_containerId == 0) ? "Fl." : "Keg";
+
+                                                switch($beerType)
+                                                {
+                                                    case "Lovely Amber":
+                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #f46a1e; border-radius: 50%; display: inline-block;\"></span> $orderItems_amount $container $beerType</li>\n";
+                                                        break;
+                                                    case "Funky IPA":
+                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #4cc070; border-radius: 50%; display: inline-block;\"></span> $orderItems_amount $container $beerType</li>\n";
+                                                        break;
+                                                    case "Frisches Mais":
+                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #e8e004; border-radius: 50%; display: inline-block;\"></span> $orderItems_amount $container $beerType</li>\n";
+                                                        break;
+                                                    case "Freaky Craft":
+                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #ed1c24; border-radius: 50%; display: inline-block;\"></span> $orderItems_amount $container $beerType</li>\n";
+                                                        break;
+                                                    case "Volles Dinkel":
+                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #b746aa; border-radius: 50%; display: inline-block;\"></span> $orderItems_amount $container $beerType</li>\n";
+                                                        break;
+                                                    default:
+                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #ffffff; border-radius: 50%; display: inline-block;\"></span> $orderItems_amount $container $beerType</li>\n";
+                                                        break;
+                                                }
+                                            }
+
+                                            if ($res_numCrates > 1)
+                                            {
+                                                echo "    <li>&mdash;</li><li><i class=\"bi bi-box-seam\"></i> $res_numCrates Harasse</li>\n";
+                                            }
+                                            else if ($res_numCrates > 0)
+                                            {
+                                                echo "    <li>&mdash;</li><li><i class=\"bi bi-box-seam\"></i> $res_numCrates Harass</li>\n";
+                                            }
+
+                                            echo "        </ul>\n";
+                                            echo "    </td>\n";
+
+                                            echo "    <td>$res_price CHF</td>\n";
+
+                                            // status
+                                            echo "    <td>\n";
+                                            echo "        <ul style=\"list-style-type:none;\">\n";
+                                            if ($res_deliveryStatusId == 1)
+                                            {
+                                                echo "        <li><i style=\"color:green;\" class=\"bi bi-check\"></i>geliefert</li>\n";
+                                            }
+                                            else
+                                            {
+                                                echo "        <li><i style=\"color:red;\" class=\"bi bi-x\"></i>noch nicht geliefert</li>\n";
+                                            }
+                                            if ($res_paymentStatusId == 1)
+                                            {
+                                                echo "        <li><i style=\"color:green;\" class=\"bi bi-check\"></i>bezahlt</li>\n";
+                                            }
+                                            else
+                                            {
+                                                echo "        <li><i style=\"color:red;\" class=\"bi bi-x\"></i>noch nicht bezahlt</li>\n";
+                                            }
+                                            if ($res_bankaccountStatusId == 1)
+                                            {
+                                                echo "        <li><i style=\"color:green;\" class=\"bi bi-check\"></i>Geld auf Konto</li>\n";
+                                            }
+                                            else
+                                            {
+                                                echo "        <li><i style=\"color:red;\" class=\"bi bi-x\"></i>Geld noch nicht auf Konto</li>\n";
+                                            }
+                                            if ($res_numCrates > 0)
+                                            {
+                                                if ($res_crateStatusId == 1)
+                                                {
+                                                    echo "        <li><i style=\"color:green;\" class=\"bi bi-check\"></i>Harass zurück</li>\n";
+                                                }
+                                                else
+                                                {
+                                                    echo "        <li><i style=\"color:red;\" class=\"bi bi-x\"></i>Harass noch nicht zurück</li>\n";
+                                                }
+                                            }
+                                            echo "        </ul>\n";
+                                            echo "    </td>\n";
                                             echo "</tr>\n";
                                         }
                                         ?>
