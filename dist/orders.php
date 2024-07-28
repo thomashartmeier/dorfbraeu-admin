@@ -92,6 +92,7 @@ include("connection.php");
                                             <th>Bestellung</th>
                                             <th>Preis</th>
                                             <th>Status</th>
+                                            <th>Notizen</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -111,6 +112,7 @@ include("connection.php");
                                             $res_deliveryStatusId = $result['deliveryStatusId'];
                                             $res_paymentStatusId = $result['paymentStatusId'];
                                             $res_bankaccountStatusId = $result['bankaccountStatusId'];
+                                            $res_notes = $result['notes'];
 
                                             echo "<tr>\n";
                                             echo "    <td>$res_date</td>\n";
@@ -141,6 +143,7 @@ include("connection.php");
                                                 $orderItems_beerId = $result['beerId'];
                                                 $orderItems_amount = $result['amount'];
                                                 $orderItems_containerId = $result['containerId'];
+                                                $orderItems_gift = $result['gift'];
 
                                                 // get name for beerId
                                                 $sqlBeer = "SELECT * FROM beers WHERE id = $orderItems_beerId";
@@ -149,26 +152,27 @@ include("connection.php");
                                                 $beerType = $resultBeer['type'];
 
                                                 $container = ($orderItems_containerId == 0) ? "Fl." : "Keg";
+                                                $gift = ($orderItems_gift == 1) ? "<i class=\"bi bi-gift-fill\"></i>" : "";
 
                                                 switch($beerType)
                                                 {
                                                     case "Lovely Amber":
-                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #f46a1e; border-radius: 50%; display: inline-block;\"></span> $orderItems_amount $container $beerType</li>\n";
+                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #f46a1e; border-radius: 50%; display: inline-block;\"></span> $orderItems_amount $container $beerType $gift</li>\n";
                                                         break;
                                                     case "Funky IPA":
-                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #4cc070; border-radius: 50%; display: inline-block;\"></span> $orderItems_amount $container $beerType</li>\n";
+                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #4cc070; border-radius: 50%; display: inline-block;\"></span> $orderItems_amount $container $beerType $gift</li>\n";
                                                         break;
                                                     case "Frisches Mais":
-                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #e8e004; border-radius: 50%; display: inline-block;\"></span> $orderItems_amount $container $beerType</li>\n";
+                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #e8e004; border-radius: 50%; display: inline-block;\"></span> $orderItems_amount $container $beerType $gift</li>\n";
                                                         break;
                                                     case "Freaky Craft":
-                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #ed1c24; border-radius: 50%; display: inline-block;\"></span> $orderItems_amount $container $beerType</li>\n";
+                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #ed1c24; border-radius: 50%; display: inline-block;\"></span> $orderItems_amount $container $beerType $gift</li>\n";
                                                         break;
                                                     case "Volles Dinkel":
-                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #b746aa; border-radius: 50%; display: inline-block;\"></span> $orderItems_amount $container $beerType</li>\n";
+                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #b746aa; border-radius: 50%; display: inline-block;\"></span> $orderItems_amount $container $beerType $gift</li>\n";
                                                         break;
                                                     default:
-                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #ffffff; border-radius: 50%; display: inline-block;\"></span> $orderItems_amount $container $beerType</li>\n";
+                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #ffffff; border-radius: 50%; display: inline-block;\"></span> $orderItems_amount $container $beerType $gift</li>\n";
                                                         break;
                                                 }
                                             }
@@ -227,6 +231,7 @@ include("connection.php");
                                             }
                                             echo "        </ul>\n";
                                             echo "    </td>\n";
+                                            echo "    <td>$res_notes</td>\n";
                                             echo "</tr>\n";
                                         }
                                         ?>
