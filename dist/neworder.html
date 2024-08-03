@@ -3,6 +3,19 @@ session_start();
 
 include("connection.php");
 
+
+function getCustomerSelection()
+{
+    $customerList = "";
+
+    for ($customerIx=0; $customerIx<5; $customerIx++)
+    {
+        $customerList .= "<option value=\"customer${customerIx}\">Customer $customerIx</option>\n";
+    }
+
+    return $customerList;
+}
+
 //if (!isset($_SESSION['username'])) {
 //    header("location:login.php");
 //}
@@ -106,6 +119,9 @@ include("connection.php");
                                     </td>
                                     <td>
                                         <select id="customers" name="customers">
+                                            <?php
+                                            echo getCustomerSelection();
+                                            ?>
                                             <option value="customer1">Customer 1</option>
                                             <option value="customer2">Customer 2</option>
                                         </select>
