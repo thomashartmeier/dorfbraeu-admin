@@ -16,6 +16,18 @@ function getCustomerSelection()
     return $customerList;
 }
 
+function getBeertypeSelection()
+{
+    $beertypeList = "";
+
+    for ($beertypeIx=0; $beertypeIx<5; $beertypeIx++)
+    {
+        $beertypeList .= "<option value='beertype${beertypeIx}' size='2'>Beer Type $beertypeIx</option>";
+    }
+
+    return $beertypeList;
+}
+
 //if (!isset($_SESSION['username'])) {
 //    header("location:login.php");
 //}
@@ -48,7 +60,15 @@ function getCustomerSelection()
             else
             {
                 var newrow = document.createElement("tr");
-                newrow.innerHTML = "<td><input type='text' name='numBottles[]'></td><td><select id='cars' name='cars'><option value='volvo'>Volvo</option></select></td><td><input type='checkbox'></input></td>";
+                newrow.innerHTML  = "<td><input type='text' name='numBottles[]' size='2' onchange='calculatePrice()'></td>\n \
+                <td>\n \
+                    <select id='cars' name='cars'>\n \
+                        <?php
+                            echo getBeertypeSelection();
+                        ?>
+                    </select>\n \
+                </td>\n \
+                <td><input type='checkbox'></input></td>";
                 document.getElementById(divName).appendChild(newrow);
                 counter++;
             }
@@ -150,9 +170,10 @@ function getCustomerSelection()
                                 <tr name="orderItem[]">
                                     <td><input type="text" name="numBottles[]" size="2"></td>
                                     <td>
-                                        <select id="beertypes" name="beertypes">
-                                            <option value="frischesmais">Frisches Mais</option>
-                                            <option value="freakycraft">Freaky Craft</option>
+                                        <select id="beertypes" name="beertypes" onchange="calculatePrice()">
+                                            <?php
+                                            echo getBeertypeSelection();
+                                            ?>
                                         </select>
                                     </td>
                                     <td><input type="checkbox"></input></td>
