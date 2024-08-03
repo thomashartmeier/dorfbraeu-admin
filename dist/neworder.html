@@ -34,10 +34,9 @@ include("connection.php");
             }
             else
             {
-                var newdiv = document.createElement("tr");
-                newdiv.innerHTML = "<tr><td><input type='text' name='numBottles[]'></td><td><select id='cars' name='cars'><option value='volvo'>Volvo</option></select></td><td><input type='checkbox'></input></td></tr>";
-                //newDiv.innerHTML = "<input type='text' name='myInputs[]'><input type='number' step='any' name='mods[]'><input type='text' step='any' name='urls[]'>";
-                document.getElementById(divName).appendChild(newdiv);
+                var newrow = document.createElement("tr");
+                newrow.innerHTML = "<td><input type='text' name='numBottles[]'></td><td><select id='cars' name='cars'><option value='volvo'>Volvo</option></select></td><td><input type='checkbox'></input></td>";
+                document.getElementById(divName).appendChild(newrow);
                 counter++;
             }
             calculatePrice();
@@ -126,11 +125,11 @@ include("connection.php");
                                 </tr>
                             </table>
                             <p><h3>Bestellung:</h3></p>
-                            <table>
+                            <table id="ordertable">
                                 <tr>
-                                    <td width="150">Anzahl Flaschen</td>
-                                    <td>Biersorte</td>
-                                    <td>Geschenk</td>
+                                    <th width="150">Anzahl Flaschen</th>
+                                    <th>Biersorte</th>
+                                    <th>Geschenk</th>
                                 </tr>
                                 <tr name="orderItem[]">
                                     <td><input type="text" name="numBottles[]"></td>
@@ -143,7 +142,7 @@ include("connection.php");
                                     <td><input type="checkbox"></input></td>
                                 </tr>
                             </table>
-                            <input type="button" value="+" onClick="addInput('orderItem');">
+                            <input type="button" value="+" onClick="addInput('ordertable');">
                             <hr>
                             <p><input type="submit"></input></p>
                         </form>
