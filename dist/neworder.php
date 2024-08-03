@@ -77,7 +77,7 @@ function getBeertypeSelection()
 
         function calculatePrice()
         {
-            var number = "123";
+            var number = Math.random()*10;
             document.getElementById("calculatedPrice").innerHTML = number;
         }
         </script>
@@ -142,21 +142,19 @@ function getBeertypeSelection()
                                             <?php
                                             echo getCustomerSelection();
                                             ?>
-                                            <option value="customer1">Customer 1</option>
-                                            <option value="customer2">Customer 2</option>
                                         </select>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Preis (CHF):</td>
                                     <td>
-                                        <input name="price" id="price" required></input> (berechnet: <span id="calculatedPrice"></span> CHF)
+                                        <input name="price" id="price" size="2" required></input> (berechnet: <span id="calculatedPrice"></span> CHF)
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Anzahl Harasse:</td>
                                     <td>
-                                        <input name="numCrates" type="select" id="numCrates" required></input>
+                                        <input name="numCrates" type="select" id="numCrates" size="2" onchange="calculatePrice()" required></input>
                                     </td>
                                 </tr>
                             </table>
@@ -168,7 +166,7 @@ function getBeertypeSelection()
                                     <th>Geschenk</th>
                                 </tr>
                                 <tr name="orderItem[]">
-                                    <td><input type="text" name="numBottles[]" size="2"></td>
+                                    <td><input type="text" name="numBottles[]" size="2" onchange="calculatePrice()"></td>
                                     <td>
                                         <select id="beertypes" name="beertypes" onchange="calculatePrice()">
                                             <?php
@@ -176,7 +174,7 @@ function getBeertypeSelection()
                                             ?>
                                         </select>
                                     </td>
-                                    <td><input type="checkbox"></input></td>
+                                    <td><input type="checkbox" onchange="calculatePrice()"></input></td>
                                 </tr>
                             </table>
                             <input type="button" value="+" onClick="addInput('ordertable');">
