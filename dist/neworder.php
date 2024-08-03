@@ -60,7 +60,7 @@ function getBeertypeSelection()
             else
             {
                 var newrow = document.createElement("tr");
-                newrow.innerHTML  = "<td><input type='text' name='numBottles[]' size='2' onchange='calculatePrice()'></td>\n \
+                newrow.innerHTML  = "<td><input type='number' name='numBottles[]' size='2' onchange='calculatePrice()'></td>\n \
                 <td>\n \
                     <select id='cars' name='cars'>\n \
                         <?php
@@ -148,13 +148,13 @@ function getBeertypeSelection()
                                 <tr>
                                     <td>Preis (CHF):</td>
                                     <td>
-                                        <input name="price" id="price" size="2" required></input> (berechnet: <span id="calculatedPrice"></span> CHF)
+                                        <input name="price" type="number" id="price" size="2" required></input> (berechnet: <span id="calculatedPrice"></span> CHF)
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Anzahl Harasse:</td>
                                     <td>
-                                        <input name="numCrates" type="select" id="numCrates" size="2" onchange="calculatePrice()" required></input>
+                                        <input name="numCrates" type="number" id="numCrates" size="2" onchange="calculatePrice()" required></input>
                                     </td>
                                 </tr>
                             </table>
@@ -166,7 +166,7 @@ function getBeertypeSelection()
                                     <th>Geschenk</th>
                                 </tr>
                                 <tr name="orderItem[]">
-                                    <td><input type="text" name="numBottles[]" size="2" onchange="calculatePrice()"></td>
+                                    <td><input type="number" name="numBottles[]" size="2" onchange="calculatePrice()"></td>
                                     <td>
                                         <select id="beertypes" name="beertypes" onchange="calculatePrice()">
                                             <?php
@@ -179,7 +179,7 @@ function getBeertypeSelection()
                             </table>
                             <input type="button" value="+" onClick="addInput('ordertable');">
                             <hr>
-                            <p><input type="submit"></input></p>
+                            <p><input type="submit" value="Speichern"></input></p>
                         </form>
                     </div>
                 </main>
