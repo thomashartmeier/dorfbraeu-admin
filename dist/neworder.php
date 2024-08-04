@@ -148,13 +148,13 @@ function getBeertypeSelection()
                                 <tr>
                                     <td>Preis (CHF):</td>
                                     <td>
-                                        <input name="price" type="number" id="price" size="2" required></input> (berechnet: <span id="calculatedPrice"></span> CHF)
+                                        <input name="price" type="number" id="price" size="2" required> (berechnet: <span id="calculatedPrice"></span> CHF)
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Anzahl Harasse:</td>
                                     <td>
-                                        <input name="numCrates" type="number" id="numCrates" size="2" onchange="calculatePrice()" required></input>
+                                        <input name="numCrates" type="number" id="numCrates" size="2" onchange="calculatePrice()" required>
                                     </td>
                                 </tr>
                             </table>
@@ -179,7 +179,7 @@ function getBeertypeSelection()
                             </table>
                             <input type="button" value="+" onClick="addInput('ordertable');">
                             <hr>
-                            <p><input type="submit" value="Speichern"></input></p>
+                            <p><input type="submit" value="Speichern"></p>
                         </form>
                     </div>
                 </main>
