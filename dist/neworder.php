@@ -18,11 +18,19 @@ function getCustomerSelection()
 
 function getBeertypeSelection()
 {
+    global $conn;
+
     $beertypeList = "";
 
-    for ($beertypeIx=0; $beertypeIx<5; $beertypeIx++)
+    $sql = "SELECT * FROM beers";
+    $query = mysqli_query($conn, $sql) or die("Could not run SQL query.");
+
+    while ($result = mysqli_fetch_assoc($query))
     {
-        $beertypeList .= "<option value='beertype${beertypeIx}' name='beertype${beertypeIx}' id='beertype${beertypeIx}' size='2'>Beer Type $beertypeIx</option>";
+        $res_id = $result['id'];
+        $res_type = $result['type'];
+
+        $beertypeList .= "<option value='beertype${res_id}' name='beertype${res_id}' id='beertype${res_id}' size='2'>$res_type</option>";
     }
 
     return $beertypeList;
