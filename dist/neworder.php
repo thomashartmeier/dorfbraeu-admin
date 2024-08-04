@@ -6,11 +6,27 @@ include("connection.php");
 
 function getCustomerSelection()
 {
+    global $conn;
+
     $customerList = "";
 
-    for ($customerIx=0; $customerIx<5; $customerIx++)
+    $sql = "SELECT * FROM clients ORDER BY lastname";
+    $query = mysqli_query($conn, $sql) or die("Could not run SQL query.");
+
+    while ($result = mysqli_fetch_assoc($query))
     {
-        $customerList .= "<option value=\"customer${customerIx}\">Customer $customerIx</option>\n";
+        $res_id = $result['id'];
+        $res_prename = $result['prename'];
+        $res_lastname = $result['lastname'];
+        $res_isReseller = $result['isReseller'];
+        $resellerFlag = '';
+
+        if ($res_isReseller)
+        {
+            $resellerFlag = ' (*)';
+        }
+
+        $customerList .= "<option value=\"customer${res_id}\">$res_lastname, ${res_prename}${resellerFlag}</option>\n";
     }
 
     return $customerList;
@@ -173,7 +189,7 @@ function getBeertypeSelection()
                                             <?php
                                             echo getCustomerSelection();
                                             ?>
-                                        </select>
+                                        </select> (*) Kunde ist Wiederverkäufer
                                     </td>
                                 </tr>
                                 <tr>
