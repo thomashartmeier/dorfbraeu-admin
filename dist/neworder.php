@@ -22,7 +22,7 @@ function getBeertypeSelection()
 
     for ($beertypeIx=0; $beertypeIx<5; $beertypeIx++)
     {
-        $beertypeList .= "<option value='beertype${beertypeIx}' size='2'>Beer Type $beertypeIx</option>";
+        $beertypeList .= "<option value='beertype${beertypeIx}' name='beertype${beertypeIx}' id='beertype${beertypeIx}' size='2'>Beer Type $beertypeIx</option>";
     }
 
     return $beertypeList;
@@ -62,13 +62,13 @@ function getBeertypeSelection()
                 var newrow = document.createElement("tr");
                 newrow.innerHTML  = "<td><input type='number' name='numBottles[]' size='2' onchange='calculatePrice()'></td>\n \
                 <td>\n \
-                    <select id='cars' name='cars'>\n \
+                    <select name='bierselect[]' onchange='calculatePrice()'>\n \
                         <?php
                             echo getBeertypeSelection();
                         ?>
                     </select>\n \
                 </td>\n \
-                <td><input type='checkbox'></input></td>";
+                <td><input type='hidden' value='0' name='giftselect[" + counter + "]'><input type='checkbox' name='giftselect[" + counter + "]' value='1' onchange='calculatePrice()' /></td>";
                 document.getElementById(divName).appendChild(newrow);
                 counter++;
             }
@@ -129,6 +129,29 @@ function getBeertypeSelection()
             </div>
             <div id="layoutSidenav_content">
                 <main>
+                    <?php
+                    $price = $_POST['price'];
+                    $client = $_POST['customers'];
+                    $numCrates = $_POST['numCrates'];
+
+                    if (empty($price))
+                    {
+                        // nothing to say
+                    }
+                    else
+                    {
+                        echo "Kunde: $client, Preis: $price, Harasse: $numCrates<br>";
+
+                        $arr_numBottles = $_POST["numBottles"];
+                        $arr_beerType = $_POST["bierselect"];
+                        $arr_gift = $_POST["giftselect"];
+
+                        for ($i = 0; $i < sizeof($arr_numBottles); $i++)
+                        {
+                            echo "# $arr_numBottles[$i] Fl. $arr_beerType[$i] (Geschenk: $arr_gift[$i])<br>";
+                        }
+                    }
+                    ?>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Neue Bestellung</h1>
                         <form id="formIdentifier" method="POST" action="./neworder.php">
@@ -168,13 +191,13 @@ function getBeertypeSelection()
                                 <tr name="orderItem[]">
                                     <td><input type="number" name="numBottles[]" size="2" onchange="calculatePrice()"></td>
                                     <td>
-                                        <select id="beertypes" name="beertypes" onchange="calculatePrice()">
+                                        <select name="bierselect[]" onchange="calculatePrice()">
                                             <?php
                                             echo getBeertypeSelection();
                                             ?>
                                         </select>
                                     </td>
-                                    <td><input type="checkbox" onchange="calculatePrice()"></input></td>
+                                    <td><input type='hidden' value='0' name='giftselect[0]'><input type="checkbox" name='giftselect[0]' value='1' onchange="calculatePrice()" /></td>
                                 </tr>
                             </table>
                             <input type="button" value="+" onClick="addInput('ordertable');">
