@@ -26,7 +26,7 @@ function getCustomerSelection()
             $resellerFlag = ' (*)';
         }
 
-        $customerList .= "<option value=\"customer${res_id}\">$res_lastname, ${res_prename}${resellerFlag}</option>\n";
+        $customerList .= "<option value=\"${res_id}\">$res_lastname, ${res_prename}${resellerFlag}</option>\n";
     }
 
     return $customerList;
@@ -46,7 +46,7 @@ function getBeertypeSelection()
         $res_id = $result['id'];
         $res_type = $result['type'];
 
-        $beertypeList .= "<option value='beertype${res_id}' name='beertype${res_id}' id='beertype${res_id}' size='2'>$res_type</option>";
+        $beertypeList .= "<option value='${res_id}' name='beertype${res_id}' id='beertype${res_id}' size='2'>$res_type</option>";
     }
 
     return $beertypeList;
