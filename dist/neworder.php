@@ -207,6 +207,8 @@ function getBeertypeSelection()
 
                             $query = mysqli_query($conn, $sqlOrderItem) or die("Could not run SQL query.");
                         }
+
+                        echo "<p style=\"background-color:powderblue;\">Neue Bestellung dazugefügt <i class=\"bi bi-hand-thumbs-up-fill\"></i></p>";
                     }
                     ?>
                     <div class="container-fluid px-4">
