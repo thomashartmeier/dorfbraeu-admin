@@ -164,7 +164,17 @@ function getBeertypeSelection()
                     }
                     else
                     {
-                        echo "Kunde: $client, Preis: $price, Harasse: $numCrates<br>";
+                        $createDate = date("Y-m-d");
+                        $statusOpen = 0;
+
+                        $sql = "INSERT INTO orders (createDate,    userId, clientId, deliveryStatusId, paymentStatusId, bankaccountStatusId, price,  numCrates,  crateStatusId, notes) VALUES
+                                                   ('$createDate', 0,      $client,  $statusOpen,      $statusOpen,     $statusOpen,         $price, $numCrates, $statusOpen,   '')";
+
+                        $query = mysqli_query($conn, $sql) or die("Could not run SQL query.");
+
+                        $newOrderId = mysqli_insert_id($conn);
+
+                        // to the order with the new id that we received we now attach the ordered items
 
                         $arr_numBottles = $_POST["numBottles"];
                         $arr_beerType = $_POST["bierselect"];
@@ -172,7 +182,14 @@ function getBeertypeSelection()
 
                         for ($i = 0; $i < sizeof($arr_numBottles); $i++)
                         {
-                            echo "# $arr_numBottles[$i] Fl. $arr_beerType[$i] (Geschenk: $arr_gift[$i])<br>";
+                            $beerId = $arr_beerType[$i];
+                            $amount = $arr_numBottles[$i];
+                            $gift = $arr_gift[$i];
+
+                            $sqlOrderItem = "INSERT INTO orderItems (beerId,  containerId, amount,  gift,  orderId) VALUES
+                                                                    ('$beerId', '0',           '$amount', '$gift', '$newOrderId')";
+
+                            $query = mysqli_query($conn, $sqlOrderItem) or die("Could not run SQL query.");
                         }
                     }
                     ?>
