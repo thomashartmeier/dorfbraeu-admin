@@ -132,18 +132,18 @@ include("connection.php");
                                             echo "    <td>$clientName</td>\n";
 
                                             // get all the order items that belong to that order
-                                            $sql = "SELECT * FROM orderItems WHERE orderId = $res_id";
-                                            $query = mysqli_query($conn, $sql) or die("Could not run SQL query.");
+                                            $sqlItem = "SELECT * FROM orderItems WHERE orderId = $res_id";
+                                            $queryItem = mysqli_query($conn, $sqlItem) or die("Could not run SQL query.");
 
                                             echo "    <td>\n";
                                             echo "        <ul style=\"list-style-type:none;\">\n";
 
-                                            while ($result = mysqli_fetch_assoc($query))
+                                            while ($resultItem = mysqli_fetch_assoc($queryItem))
                                             {
-                                                $orderItems_beerId = $result['beerId'];
-                                                $orderItems_amount = $result['amount'];
-                                                $orderItems_containerId = $result['containerId'];
-                                                $orderItems_gift = $result['gift'];
+                                                $orderItems_beerId = $resultItem['beerId'];
+                                                $orderItems_amount = $resultItem['amount'];
+                                                $orderItems_containerId = $resultItem['containerId'];
+                                                $orderItems_gift = $resultItem['gift'];
 
                                                 // get name for beerId
                                                 $sqlBeer = "SELECT * FROM beers WHERE id = $orderItems_beerId";
