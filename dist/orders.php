@@ -103,7 +103,7 @@ include("connection.php");
                                         while ($result = mysqli_fetch_assoc($query))
                                         {
                                             $res_id = $result['id'];
-                                            $res_date = $result['date'];
+                                            $res_date = $result['createDate'];
                                             $res_userId = $result['userId'];
                                             $res_clientId = $result['clientId'];
                                             $res_price = $result['price'];
