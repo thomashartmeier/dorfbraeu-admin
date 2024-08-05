@@ -51,14 +51,30 @@ include("connection.php");
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Info</div>
-                            <a class="nav-link" href="index.html">
+                            <a class="nav-link" href="index.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Dashboard
+                            </a>
+                            <a class="nav-link" href="prices.html">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Preisgestaltung
                             </a>
                             <div class="sb-sidenav-menu-heading">Edit</div>
                             <a class="nav-link" href="orders.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Bestellungen
+                            </a>
+                            <a class="nav-link" href="neworder.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Neue Bestellung
+                            </a>
+                            <a class="nav-link" href="clients.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Kunden
+                            </a>
+                            <a class="nav-link" href="newclient.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Neuer Kundeneintrag
                             </a>
                         </div>
                     </div>
