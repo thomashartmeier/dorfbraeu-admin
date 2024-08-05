@@ -92,7 +92,7 @@ function getBeertypeSelection()
                         ?>
                     </select>\n \
                 </td>\n \
-                <td><input type='hidden' value='0' name='giftselect[" + counter + "]'><input type='checkbox' name='giftselect[" + counter + "]' value='1' onchange='calculatePrice()' /></td>";
+                <td style=\"text-align:center\"><input type='hidden' value='0' name='giftselect[" + counter + "]'><input type='checkbox' name='giftselect[" + counter + "]' value='1' onchange='calculatePrice()' /></td>";
                 document.getElementById(divName).appendChild(newrow);
                 counter++;
             }
@@ -213,7 +213,7 @@ function getBeertypeSelection()
                         <h1 class="mt-4">Neue Bestellung</h1>
                         <form id="formIdentifier" method="POST" action="./neworder.php">
                             <table>
-                                <tr>
+                                <tr valign="top">
                                     <td width="150">
                                         <label for="beertypes">Kunde:</label>
                                     </td>
@@ -222,16 +222,23 @@ function getBeertypeSelection()
                                             <?php
                                             echo getCustomerSelection();
                                             ?>
-                                        </select> (*) Kunde ist Wiederverkäufer
+                                        </select>
+                                        <ul>
+                                            <li>(*) Kunde ist Wiederverkäufer</li>
+                                        </ul>
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr valign="top">
                                     <td>Preis (CHF):</td>
                                     <td>
-                                        <input name="price" type="number" id="price" size="2" required> (berechnet: <span id="calculatedPrice"></span> CHF)
+                                        <input name="price" type="number" id="price" size="2" required>
+                                        <ul>
+                                            <li>Preis inkl. Harassendepot (10.-/Harass)</li>
+                                            <li>Berechneter Preis: <span id="calculatedPrice"></span></li>
+                                        </ul>
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr valign="top">
                                     <td>Anzahl Harasse:</td>
                                     <td>
                                         <input name="numCrates" type="number" id="numCrates" size="2" onchange="calculatePrice()" required>
@@ -254,7 +261,7 @@ function getBeertypeSelection()
                                             ?>
                                         </select>
                                     </td>
-                                    <td><input type='hidden' value='0' name='giftselect[0]'><input type="checkbox" name='giftselect[0]' value='1' onchange="calculatePrice()" /></td>
+                                    <td style="text-align:center"><input type='hidden' value='0' name='giftselect[0]'><input type="checkbox" name='giftselect[0]' value='1' onchange="calculatePrice()" /></td>
                                 </tr>
                             </table>
                             <input type="button" value="+" onClick="addInput('ordertable');">
