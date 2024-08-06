@@ -244,7 +244,7 @@ function getBeertypeSelection()
                                 <tr valign="top">
                                     <td>Anzahl Harasse:</td>
                                     <td>
-                                        <input name="numCrates" type="number" id="numCrates" size="2" onchange="calculatePrice()" required>
+                                        <input name="numCrates" type="number" value="0" id="numCrates" size="2" onchange="calculatePrice()" required>
                                     </td>
                                 </tr>
                             </table>
