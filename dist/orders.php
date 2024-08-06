@@ -105,7 +105,7 @@ include("connection.php");
                                             <th>Bestellung</th>
                                             <th>Preis</th>
                                             <th>Status</th>
-                                            <th>Notizen</th>
+                                            <th>Notiz</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -283,7 +283,7 @@ include("connection.php");
                                             <th>Bestellung</th>
                                             <th>Preis</th>
                                             <th>Status</th>
-                                            <th>Notizen</th>
+                                            <th>Notiz</th>
                                         </tr>
                                     </thead>
                                     <tbody>

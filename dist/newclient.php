@@ -152,7 +152,7 @@ include("connection.php");
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Notizen:</td>
+                                    <td>Notiz:</td>
                                     <td>
                                         <input name="notes" type="text">
                                     </td>

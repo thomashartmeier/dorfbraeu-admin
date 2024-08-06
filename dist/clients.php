@@ -106,7 +106,7 @@ include("connection.php");
                                             <th>Telefon/Mobile</th>
                                             <th>Adresse</th>
                                             <th>Erstellt von</th>
-                                            <th>Notizen</th>
+                                            <th>Notiz</th>
                                         </tr>
                                     </thead>
                                     <tbody>
