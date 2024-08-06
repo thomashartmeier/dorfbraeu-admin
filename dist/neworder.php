@@ -173,6 +173,7 @@ function getBeertypeSelection()
                     $price = $_POST['price'];
                     $client = $_POST['customers'];
                     $numCrates = $_POST['numCrates'];
+                    $notes = $_POST['notes'];
 
                     if (empty($price))
                     {
@@ -207,7 +208,7 @@ function getBeertypeSelection()
                         $createDate = date("Y-m-d");
 
                         $sql = "INSERT INTO orders (createDate,    userId, clientId, deliveryStatusId, paymentStatusId, bankaccountStatusId, price,  numCrates,  crateStatusId, notes) VALUES
-                                                   ('$createDate', 0,      $client,  0,                $paymentStatus,  $paymentStatus,      $price, $numCrates, $crateStatus,   '')";
+                                                   ('$createDate', 0,      $client,  0,                $paymentStatus,  $paymentStatus,      $price, $numCrates, $crateStatus,  '$notes')";
 
                         $query = mysqli_query($conn, $sql) or die("Could not run SQL query.");
 
@@ -264,6 +265,12 @@ function getBeertypeSelection()
                                     <td>Anzahl Harasse:</td>
                                     <td>
                                         <input name="numCrates" type="number" value="0" id="numCrates" size="2" onchange="calculatePrice()" required>
+                                    </td>
+                                </tr>
+                                <tr valign="top">
+                                    <td>Notiz:</td>
+                                    <td>
+                                        <input name="notes" type="text">
                                     </td>
                                 </tr>
                             </table>
