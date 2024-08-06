@@ -225,7 +225,7 @@ include("connection.php");
                                             }
 
                                             // any orderitem which is not a gift?
-                                            if ($anyNonGift == 0)
+                                            if ($anyNonGift == 1)
                                             {
                                                 if ($res_paymentStatusId == 1)
                                                 {
