@@ -196,6 +196,7 @@ function getBeertypeSelection()
                         $arr_beerType = $_POST["bierselect"];
                         $arr_gift = $_POST["giftselect"];
 
+                        // loop over all items and add them to the DB
                         for ($i = 0; $i < sizeof($arr_numBottles); $i++)
                         {
                             $beerId = $arr_beerType[$i];
