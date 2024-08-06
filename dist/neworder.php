@@ -180,21 +180,40 @@ function getBeertypeSelection()
                     }
                     else
                     {
+                        // check if we have any non-gift item in the orderlist
+                        $anyNonGift = 0;
+
+                        $arr_numBottles = $_POST["numBottles"];
+                        $arr_beerType = $_POST["bierselect"];
+                        $arr_gift = $_POST["giftselect"];
+
+                        // loop over all items and check if we have any non-gift item
+                        for ($i = 0; $i < sizeof($arr_numBottles); $i++)
+                        {
+                            if ($arr_gift[$i] == 0)
+                            {
+                                $anyNonGift = 1;
+                                // found any non-gift item, can break the loop
+                                break;
+                            }
+                        }
+
+                        // if we have any non-gift item, we need a payment and therefore the payment status is set to 'open'
+                        $paymentStatus = ($anyNonGift == 1) ? 0 : 1;
+
+                        // if we have any crates to deliver, the crate status is set to 'open' (i.e. we need them back)
+                        $crateStatus = ($numCrates > 0) ? 0 : 1;
+
                         $createDate = date("Y-m-d");
-                        $statusOpen = 0;
 
                         $sql = "INSERT INTO orders (createDate,    userId, clientId, deliveryStatusId, paymentStatusId, bankaccountStatusId, price,  numCrates,  crateStatusId, notes) VALUES
-                                                   ('$createDate', 0,      $client,  $statusOpen,      $statusOpen,     $statusOpen,         $price, $numCrates, $statusOpen,   '')";
+                                                   ('$createDate', 0,      $client,  0,                $paymentStatus,  $paymentStatus,      $price, $numCrates, $crateStatus,   '')";
 
                         $query = mysqli_query($conn, $sql) or die("Could not run SQL query.");
 
                         $newOrderId = mysqli_insert_id($conn);
 
                         // to the order with the new id that we received we now attach the ordered items
-
-                        $arr_numBottles = $_POST["numBottles"];
-                        $arr_beerType = $_POST["bierselect"];
-                        $arr_gift = $_POST["giftselect"];
 
                         // loop over all items and add them to the DB
                         for ($i = 0; $i < sizeof($arr_numBottles); $i++)
