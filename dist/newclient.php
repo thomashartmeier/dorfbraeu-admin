@@ -113,6 +113,9 @@ include("connection.php");
                     ?>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Neuer Kundeneintrag</h1>
+                        <ul>
+                            <li>Felder dürfen leergelassen werden (bzw. nachträglich ergänzt werden). Es muss aber mindestens entweder Vorname, Nachname, E-mail, Telefonnummer oder Adresse ausgefüllt werden.</li>
+                        </ul>
                         <form id="formIdentifier" method="POST" action="./newclient.php">
                             <table>
                                 <tr>
