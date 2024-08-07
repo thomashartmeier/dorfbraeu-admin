@@ -99,6 +99,7 @@ include("connection.php");
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
+                                            <th>Bestellnummer</th>
                                             <th>Erstelldatum</th>
                                             <th>Erstellt von</th>
                                             <th>Kunde</th>
@@ -115,6 +116,7 @@ include("connection.php");
 
                                         while ($result = mysqli_fetch_assoc($query))
                                         {
+                                            $res_orderNumber = $result['orderNumber'];
                                             $res_id = $result['id'];
                                             $res_date = $result['createDate'];
                                             $res_userId = $result['userId'];
@@ -128,6 +130,7 @@ include("connection.php");
                                             $res_notes = $result['notes'];
 
                                             echo "<tr>\n";
+                                            echo "    <td>$res_orderNumber</td>\n";
                                             echo "    <td>$res_date</td>\n";
 
                                             // get name for userId
@@ -277,6 +280,7 @@ include("connection.php");
                                 <table id="datatablesSimple2">
                                     <thead>
                                         <tr>
+                                            <th>Bestellnummer</th>
                                             <th>Erstelldatum</th>
                                             <th>Erstellt von</th>
                                             <th>Kunde</th>
@@ -293,6 +297,7 @@ include("connection.php");
 
                                         while ($result = mysqli_fetch_assoc($query))
                                         {
+                                            $res_orderNumber = $result['orderNumber'];
                                             $res_id = $result['id'];
                                             $res_date = $result['createDate'];
                                             $res_userId = $result['userId'];
@@ -306,6 +311,7 @@ include("connection.php");
                                             $res_notes = $result['notes'];
 
                                             echo "<tr>\n";
+                                            echo "    <td>$res_orderNumber</td>\n";
                                             echo "    <td>$res_date</td>\n";
 
                                             // get name for userId

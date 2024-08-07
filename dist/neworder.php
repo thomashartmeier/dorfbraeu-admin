@@ -205,10 +205,17 @@ function getBeertypeSelection()
                         // if we have any crates to deliver, the crate status is set to 'open' (i.e. we need them back)
                         $crateStatus = ($numCrates > 0) ? 0 : 1;
 
+                        // create order number
+                        $orderNumber1 = rand(0, 999);
+                        $orderNumber2 = rand(0, 999);
+
+                        // compose string of order number
+                        $orderNumberString = sprintf("%03d-%03d", $orderNumber1, $orderNumber2);
+
                         $createDate = date("Y-m-d");
 
-                        $sql = "INSERT INTO orders (createDate,    userId, clientId, deliveryStatusId, paymentStatusId, bankaccountStatusId, price,  numCrates,  crateStatusId, notes) VALUES
-                                                   ('$createDate', 0,      $client,  0,                $paymentStatus,  $paymentStatus,      $price, $numCrates, $crateStatus,  '$notes')";
+                        $sql = "INSERT INTO orders (orderNumber,          createDate,    userId, clientId, deliveryStatusId, paymentStatusId, bankaccountStatusId, price,  numCrates,  crateStatusId, notes) VALUES
+                                                   ('$orderNumberString', '$createDate', 0,      $client,  0,                $paymentStatus,  $paymentStatus,      $price, $numCrates, $crateStatus,  '$notes')";
 
                         $query = mysqli_query($conn, $sql) or die("Could not run SQL query.");
 
