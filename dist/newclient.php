@@ -161,13 +161,13 @@ include("connection.php");
                                 <tr valign="top">
                                     <td>E-mail:</td>
                                     <td>
-                                        <input name="email" type="text">
+                                        <input name="email" type="email">
                                     </td>
                                 </tr>
                                 <tr valign="top">
                                     <td>Telefon/Mobile:</td>
                                     <td>
-                                        <input name="phone" type="text">
+                                        <input name="phone" type="tel" pattern="[0-9]{3}( )?[0-9]{3}( )?[0-9]{2}( )?[0-9]{2}" placeholder="079 123 45 67">
                                     </td>
                                 </tr>
                                 <tr valign="top">
