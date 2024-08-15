@@ -227,11 +227,11 @@ function getBeertypeSelection()
                         for ($i = 0; $i < sizeof($arr_numBottles); $i++)
                         {
                             $beerId = $arr_beerType[$i];
-                            $amount = $arr_numBottles[$i];
+                            $quantity = $arr_numBottles[$i];
                             $gift = $arr_gift[$i];
 
-                            $sqlOrderItem = "INSERT INTO orderItems (beerId,  containerId, amount,  gift,  orderId) VALUES
-                                                                    ($beerId, 0,           $amount, $gift, $newOrderId)";
+                            $sqlOrderItem = "INSERT INTO orderItems (beerId,  containerId, quantity,  gift,  orderId) VALUES
+                                                                    ($beerId, 0,           $quantity, $gift, $newOrderId)";
 
                             $query = mysqli_query($conn, $sqlOrderItem) or die("Could not run SQL query.");
                         }

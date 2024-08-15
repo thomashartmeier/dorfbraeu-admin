@@ -160,7 +160,7 @@ include("connection.php");
                                             while ($resultItem = mysqli_fetch_assoc($queryItem))
                                             {
                                                 $orderItems_beerId = $resultItem['beerId'];
-                                                $orderItems_amount = $resultItem['amount'];
+                                                $orderItems_quantity = $resultItem['quantity'];
                                                 $orderItems_containerId = $resultItem['containerId'];
                                                 $orderItems_gift = $resultItem['gift'];
 
@@ -181,22 +181,22 @@ include("connection.php");
                                                 switch($beerType)
                                                 {
                                                     case "Lovely Amber":
-                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #f46a1e; border-radius: 50%; display: inline-block;\"></span> $orderItems_amount $container $beerType $gift</li>\n";
+                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #f46a1e; border-radius: 50%; display: inline-block;\"></span> $orderItems_quantity $container $beerType $gift</li>\n";
                                                         break;
                                                     case "Funky IPA":
-                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #4cc070; border-radius: 50%; display: inline-block;\"></span> $orderItems_amount $container $beerType $gift</li>\n";
+                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #4cc070; border-radius: 50%; display: inline-block;\"></span> $orderItems_quantity $container $beerType $gift</li>\n";
                                                         break;
                                                     case "Frisches Mais":
-                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #e8e004; border-radius: 50%; display: inline-block;\"></span> $orderItems_amount $container $beerType $gift</li>\n";
+                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #e8e004; border-radius: 50%; display: inline-block;\"></span> $orderItems_quantity $container $beerType $gift</li>\n";
                                                         break;
                                                     case "Freaky Craft":
-                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #ed1c24; border-radius: 50%; display: inline-block;\"></span> $orderItems_amount $container $beerType $gift</li>\n";
+                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #ed1c24; border-radius: 50%; display: inline-block;\"></span> $orderItems_quantity $container $beerType $gift</li>\n";
                                                         break;
                                                     case "Volles Dinkel":
-                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #b746aa; border-radius: 50%; display: inline-block;\"></span> $orderItems_amount $container $beerType $gift</li>\n";
+                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #b746aa; border-radius: 50%; display: inline-block;\"></span> $orderItems_quantity $container $beerType $gift</li>\n";
                                                         break;
                                                     default:
-                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #ffffff; border-radius: 50%; display: inline-block;\"></span> $orderItems_amount $container $beerType $gift</li>\n";
+                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #ffffff; border-radius: 50%; display: inline-block;\"></span> $orderItems_quantity $container $beerType $gift</li>\n";
                                                         break;
                                                 }
                                             }
@@ -338,7 +338,7 @@ include("connection.php");
                                             while ($resultItem = mysqli_fetch_assoc($queryItem))
                                             {
                                                 $orderItems_beerId = $resultItem['beerId'];
-                                                $orderItems_amount = $resultItem['amount'];
+                                                $orderItems_quantity = $resultItem['quantity'];
                                                 $orderItems_containerId = $resultItem['containerId'];
                                                 $orderItems_gift = $resultItem['gift'];
 
@@ -354,22 +354,22 @@ include("connection.php");
                                                 switch($beerType)
                                                 {
                                                     case "Lovely Amber":
-                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #f46a1e; border-radius: 50%; display: inline-block;\"></span> $orderItems_amount $container $beerType $gift</li>\n";
+                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #f46a1e; border-radius: 50%; display: inline-block;\"></span> $orderItems_quantity $container $beerType $gift</li>\n";
                                                         break;
                                                     case "Funky IPA":
-                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #4cc070; border-radius: 50%; display: inline-block;\"></span> $orderItems_amount $container $beerType $gift</li>\n";
+                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #4cc070; border-radius: 50%; display: inline-block;\"></span> $orderItems_quantity $container $beerType $gift</li>\n";
                                                         break;
                                                     case "Frisches Mais":
-                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #e8e004; border-radius: 50%; display: inline-block;\"></span> $orderItems_amount $container $beerType $gift</li>\n";
+                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #e8e004; border-radius: 50%; display: inline-block;\"></span> $orderItems_quantity $container $beerType $gift</li>\n";
                                                         break;
                                                     case "Freaky Craft":
-                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #ed1c24; border-radius: 50%; display: inline-block;\"></span> $orderItems_amount $container $beerType $gift</li>\n";
+                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #ed1c24; border-radius: 50%; display: inline-block;\"></span> $orderItems_quantity $container $beerType $gift</li>\n";
                                                         break;
                                                     case "Volles Dinkel":
-                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #b746aa; border-radius: 50%; display: inline-block;\"></span> $orderItems_amount $container $beerType $gift</li>\n";
+                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #b746aa; border-radius: 50%; display: inline-block;\"></span> $orderItems_quantity $container $beerType $gift</li>\n";
                                                         break;
                                                     default:
-                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #ffffff; border-radius: 50%; display: inline-block;\"></span> $orderItems_amount $container $beerType $gift</li>\n";
+                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #ffffff; border-radius: 50%; display: inline-block;\"></span> $orderItems_quantity $container $beerType $gift</li>\n";
                                                         break;
                                                 }
                                             }
