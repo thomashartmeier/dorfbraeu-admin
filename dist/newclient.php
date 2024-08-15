@@ -181,7 +181,7 @@ include("connection.php");
                                 <tr valign="top">
                                     <td>Notiz:</td>
                                     <td>
-                                        <input name="notes" type="text">
+                                        <input name="notes" type="text" style="height:100px;">
                                     </td>
                                 </tr>
                             </table>
