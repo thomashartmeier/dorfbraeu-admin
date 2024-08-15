@@ -279,7 +279,11 @@ function getBeertypeSelection()
                                 <tr valign="top">
                                     <td>Anzahl Harasse:</td>
                                     <td>
-                                        <input name="numCrates" type="number" value="0" id="numCrates" size="2" min="0" onchange="calculatePrice()" required>
+                                        <input name="numCrates" type="number" value="0" id="numCrates" size="2" onchange="calculatePrice()" required>
+                                        <ul>
+                                            <span style="color:gray"><li>Die hier eingetragene Anzahl Harasse soll der Menge "gelieferter minus zurückerhaltener" bei erfolgter Auslieferung entsprechen. Wichtig: Da es sein kann, dass bei der Auslieferung mehr Harasse zurückgekommen sind (von früheren Aufträgen) als ausgeliefert, kann dieses Feld auch negativ sein! Die Anzahl Harasse, die uns ein Kunde noch schuldet, kann im <a href="index.php">Dashboard</a> nachgeschaut werden.</li></span>
+                                            <span style="color:gray"><li>Falls der Kunde nach einer Weile einfach den/die Harass(e) zurückgibt ohne eine neue Bestellung aufzugeben, kann seine letzte Bestellung editiert werden und dort das Feld "Anzahl Harasse" auf 0 gesetzt werden.</li></span>
+                                        </ul>
                                     </td>
                                 </tr>
                                 <tr valign="top">

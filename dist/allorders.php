@@ -210,11 +210,11 @@ include("connection.php");
                                                 }
                                             }
 
-                                            if ($res_numCrates > 1)
+                                            if ($res_numCrates > 1 || $res_numCrates < -1)
                                             {
                                                 echo "    <li>&mdash;</li><li><i class=\"bi bi-box-seam\"></i> $res_numCrates Harasse</li>\n";
                                             }
-                                            else if ($res_numCrates > 0)
+                                            else if ($res_numCrates == 1 || $res_numCrates == -1)
                                             {
                                                 echo "    <li>&mdash;</li><li><i class=\"bi bi-box-seam\"></i> $res_numCrates Harass</li>\n";
                                             }
