@@ -84,7 +84,7 @@ function getBeertypeSelection()
             else
             {
                 var newrow = document.createElement("tr");
-                newrow.innerHTML  = "<td><input type='number' name='numBottles[]' size='2' onchange='calculatePrice()'></td>\n \
+                newrow.innerHTML  = "<td><input type='number' name='numBottles[]' size='2' onchange='calculatePrice()' required></td>\n \
                 <td>\n \
                     <select name='bierselect[]' onchange='calculatePrice()'>\n \
                         <?php
@@ -289,7 +289,7 @@ function getBeertypeSelection()
                                     <th>Geschenk</th>
                                 </tr>
                                 <tr name="orderItem[]">
-                                    <td><input type="number" name="numBottles[]" size="2" onchange="calculatePrice()"></td>
+                                    <td><input type="number" name="numBottles[]" size="2" onchange="calculatePrice()" required></td>
                                     <td>
                                         <select name="bierselect[]" onchange="calculatePrice()">
                                             <?php
