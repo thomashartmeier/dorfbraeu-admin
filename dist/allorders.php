@@ -91,7 +91,7 @@ include("connection.php");
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Bestellungen</h1>
+                        <h1 class="mt-4">Alle Bestellungen</h1>
                         <p><a class="btn btn-primary" href="neworder.php"><i class="bi bi-cart-plus"></i> Neue Bestellung</a></p>
                         <div class="card mb-4">
                             <div class="card-header">
