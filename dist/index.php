@@ -158,21 +158,14 @@ include("connection.php");
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                2024: Anzahl verkaufte Flaschen pro Kunde
+                                Anzahl verkaufter Flaschen pro Kunde
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
-                                            <th>Kunde seit</th>
                                             <th>Name</th>
-                                            <th>Firma</th>
-                                            <th>Wiederverkäufer</th>
-                                            <th>E-mail</th>
-                                            <th>Telefon/Mobile</th>
-                                            <th>Adresse</th>
-                                            <th>Erstellt von</th>
-                                            <th>Notiz</th>
+                                            <th>Anzahl Flaschen</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -182,39 +175,33 @@ include("connection.php");
 
                                         while ($result = mysqli_fetch_assoc($query))
                                         {
-                                            $res_date = $result['createDate'];
+                                            // count how many bottles this client has bought so far
+                                            $clientQuantity = 0;
+                                            $res_clientId = $result['id'];
                                             $res_prename = $result['prename'];
                                             $res_lastname = $result['lastname'];
-                                            $res_company = $result['company'];
-                                            $res_isReseller = $result['isReseller'];
-                                            $res_email = $result['email'];
-                                            $res_phone = $result['phone'];
-                                            $res_address = $result['address'];
-                                            $res_billingAddress = $result['billingAddress'];
-                                            $res_userId = $result['userId'];
-                                            $res_notes = $result['notes'];
 
-                                            $res_billingAddressString = ($res_billingAddress == '') ? "" : "<br><b>Rechnungsadresse:</b> $res_billingAddress";
+                                            // get all orders for this client
+                                            $sqlOrders = "SELECT * FROM orders WHERE clientId = $res_clientId";
+                                            $queryOrders = mysqli_query($conn, $sqlOrders) or die("Could not run SQL query.");
+
+                                            while ($resultOrders = mysqli_fetch_assoc($queryOrders))
+                                            {
+                                                $res_orderId = $resultOrders['id'];
+
+                                                // get all order items for this order
+                                                $sqlOrderItems = "SELECT * FROM orderItems WHERE orderId = $res_orderId";
+                                                $queryOrderItems = mysqli_query($conn, $sqlOrderItems) or die("Could not run SQL query.");
+
+                                                while ($resultOrderItems = mysqli_fetch_assoc($queryOrderItems))
+                                                {
+                                                    $clientQuantity += $resultOrderItems['quantity'];
+                                                }
+                                            }
 
                                             echo "<tr>\n";
-                                            echo "    <td>$res_date</td>\n";
                                             echo "    <td>$res_prename $res_lastname</td>\n";
-                                            echo "    <td>$res_company</td>\n";
-
-                                            $resellerFlag = ($res_isReseller) ? "<i class=\"bi bi-star-fill\" style=\"color: #e8e004;\"></i>" : '';
-                                            echo "    <td>$resellerFlag</td>\n";
-                                            echo "    <td>$res_email</td>\n";
-                                            echo "    <td>$res_phone</td>\n";
-                                            echo "    <td>$res_address $res_billingAddressString</td>\n";
-
-                                            // get name for userId
-                                            $sqlUser = "SELECT * FROM users WHERE id = $res_userId";
-                                            $queryUser = mysqli_query($conn, $sqlUser) or die("Could not run SQL query.");
-                                            $resultUser = mysqli_fetch_assoc($queryUser);
-                                            $userName = $resultUser['prename'];
-                                            echo "    <td>$userName</td>\n";
-
-                                            echo "    <td>$res_notes</td>\n";
+                                            echo "    <td>$clientQuantity</td>\n";
                                             echo "</tr>\n";
                                         }
                                         ?>
