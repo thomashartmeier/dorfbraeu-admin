@@ -254,7 +254,7 @@ function getBeertypeSelection()
                                             ?>
                                         </select>
                                         <ul>
-                                            <li>(*) Kunde ist Wiederverkäufer</li>
+                                            <span style="color:gray"><li>(*) Kunde ist Wiederverkäufer</li></span>
                                         </ul>
                                     </td>
                                 </tr>
@@ -263,8 +263,8 @@ function getBeertypeSelection()
                                     <td>
                                         <input name="price" type="number" id="price" size="2" required>
                                         <ul>
-                                            <li>Preis inkl. Harassendepot (10.-/Harass)</li>
-                                            <li>Berechneter Preis: <span id="calculatedPrice"></span></li>
+                                            <span style="color:gray"><li>Preis inkl. Harassendepot (10.-/Harass)</li></span>
+                                            <span style="color:gray"><li>Berechneter Preis: <span id="calculatedPrice"></span></li></span>
                                         </ul>
                                     </td>
                                 </tr>
