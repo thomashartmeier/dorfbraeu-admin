@@ -108,12 +108,13 @@ include("connection.php");
                             $email = $_POST['email'];
                             $phone = $_POST['phone'];
                             $address = $_POST['address'];
+                            $billingAddress = $_POST['billingAddress'];
                             $notes = $_POST['notes'];
 
                             $createDate = date("Y-m-d");
 
-                            $sql = "INSERT INTO clients (createDate,    prename,    lastname,    isReseller,  email,    phone,    address,    userId,  notes) VALUES
-                                                        ('$createDate', '$prename', '$lastname', $isReseller, '$email', '$phone', '$address', 0, '$notes')";
+                            $sql = "INSERT INTO clients (createDate,    prename,    lastname,    isReseller,  email,    phone,    address,    billingAddress,    userId,  notes) VALUES
+                                                        ('$createDate', '$prename', '$lastname', $isReseller, '$email', '$phone', '$address', '$billingAddress', 0,       '$notes')";
 
                             $query = mysqli_query($conn, $sql) or die("Could not run SQL query.");
 
@@ -128,47 +129,56 @@ include("connection.php");
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Neuer Kundeneintrag</h1>
                         <ul>
-                            <li>Felder dürfen leergelassen werden (bzw. nachträglich ergänzt werden). Es muss aber mindestens Vor- oder Nachname ausgefüllt werden.</li>
+                            <span style="color:gray"><li>Felder dürfen leergelassen werden (bzw. nachträglich ergänzt werden). Es muss aber mindestens Vor- oder Nachname ausgefüllt werden.</li></span>
                         </ul>
                         <form id="formIdentifier" method="POST" action="./newclient.php">
                             <table>
-                                <tr>
+                                <tr valign="top">
                                     <td>Vorname:</td>
                                     <td>
                                         <input name="prename" type="text">
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr valign="top">
                                     <td>Nachname:</td>
                                     <td>
                                         <input name="lastname" type="text">
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr valign="top">
                                     <td>Wiederverkäufer:</td>
                                     <td>
                                         <input type='hidden' value='0' name='isReseller'><input type="checkbox" name='isReseller' value='1' />
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr valign="top">
                                     <td>E-mail:</td>
                                     <td>
                                         <input name="email" type="text">
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr valign="top">
                                     <td>Telefon/Mobile:</td>
                                     <td>
                                         <input name="phone" type="text">
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr valign="top">
                                     <td>Adresse:</td>
                                     <td>
                                         <input name="address" type="text">
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr valign="top">
+                                    <td>Rechnungsadresse:</td>
+                                    <td>
+                                        <input name="billingAddress" type="text">
+                                        <ul>
+                                            <span style="color:gray"><li>Muss nur ausgefüllt werden falls abweichend von obiger (Liefer-)Adresse.</li></span>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr valign="top">
                                     <td>Notiz:</td>
                                     <td>
                                         <input name="notes" type="text">
