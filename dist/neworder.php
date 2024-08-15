@@ -170,17 +170,17 @@ function getBeertypeSelection()
             <div id="layoutSidenav_content">
                 <main>
                     <?php
-                    $price = $_POST['price'];
-                    $client = $_POST['customers'];
-                    $numCrates = $_POST['numCrates'];
-                    $notes = $_POST['notes'];
+                    $submitted = $_POST['submitted'];
 
-                    if (empty($price))
+                    if (!empty($submitted))
                     {
-                        // nothing to say
-                    }
-                    else
-                    {
+                        // the form was submitted, so we can send it (no need to check for valid form data)
+
+                        $price = $_POST['price'];
+                        $client = $_POST['customers'];
+                        $numCrates = $_POST['numCrates'];
+                        $notes = $_POST['notes'];
+
                         // check if we have any non-gift item in the orderlist
                         $anyNonGift = 0;
 
@@ -237,6 +237,10 @@ function getBeertypeSelection()
                         }
 
                         echo "<p style=\"background-color:powderblue;\">Neue Bestellung dazugefügt <i class=\"bi bi-hand-thumbs-up-fill\"></i></p>";
+                    }
+                    else
+                    {
+                        // nothing to say if form was not submitted yet
                     }
                     ?>
                     <div class="container-fluid px-4">
@@ -302,6 +306,7 @@ function getBeertypeSelection()
                             </table>
                             <input type="button" value="+" onClick="addInput('ordertable');">
                             <hr>
+                            <input type='hidden' value='1' name='submitted'>
                             <p><input type="submit" value="Speichern"></p>
                         </form>
                     </div>
