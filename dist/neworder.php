@@ -289,7 +289,7 @@ function getBeertypeSelection()
                                 <tr valign="top">
                                     <td>Notiz:</td>
                                     <td>
-                                        <input name="notes" type="text" style="height:100px;">
+                                        <textarea name="notes"></textarea>
                                     </td>
                                 </tr>
                             </table>
