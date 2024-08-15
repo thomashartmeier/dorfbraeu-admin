@@ -161,12 +161,17 @@ include("connection.php");
                                             // check if we have any non-gift item in the orderlist
                                             $anyNonGift = 0;
 
+                                            // count how many bottles this order sums up to
+                                            $totalNumBottles = 0;
+
                                             while ($resultItem = mysqli_fetch_assoc($queryItem))
                                             {
                                                 $orderItems_beerId = $resultItem['beerId'];
                                                 $orderItems_quantity = $resultItem['quantity'];
                                                 $orderItems_containerId = $resultItem['containerId'];
                                                 $orderItems_gift = $resultItem['gift'];
+
+                                                $totalNumBottles += $orderItems_quantity;
 
                                                 // get name for beerId
                                                 $sqlBeer = "SELECT * FROM beers WHERE id = $orderItems_beerId";
@@ -213,6 +218,8 @@ include("connection.php");
                                             {
                                                 echo "    <li>&mdash;</li><li><i class=\"bi bi-box-seam\"></i> $res_numCrates Harass</li>\n";
                                             }
+
+                                            echo "    <li><i class=\"bi bi-hash\"></i> total $totalNumBottles Flaschen</li>\n";
 
                                             echo "        </ul>\n";
                                             echo "    </td>\n";

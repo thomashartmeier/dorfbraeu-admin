@@ -158,12 +158,20 @@ include("connection.php");
                                             echo "    <td>\n";
                                             echo "        <ul style=\"list-style-type:none;\">\n";
 
+                                            // check if we have any non-gift item in the orderlist
+                                            $anyNonGift = 0;
+
+                                            // count how many bottles this order sums up to
+                                            $totalNumBottles = 0;
+
                                             while ($resultItem = mysqli_fetch_assoc($queryItem))
                                             {
                                                 $orderItems_beerId = $resultItem['beerId'];
                                                 $orderItems_quantity = $resultItem['quantity'];
                                                 $orderItems_containerId = $resultItem['containerId'];
                                                 $orderItems_gift = $resultItem['gift'];
+
+                                                $totalNumBottles += $orderItems_quantity;
 
                                                 // get name for beerId
                                                 $sqlBeer = "SELECT * FROM beers WHERE id = $orderItems_beerId";
@@ -173,6 +181,11 @@ include("connection.php");
 
                                                 $container = ($orderItems_containerId == 0) ? "Fl." : "Keg";
                                                 $gift = ($orderItems_gift == 1) ? "<i class=\"bi bi-gift-fill\"></i>" : "";
+
+                                                if ($orderItems_gift == 0)
+                                                {
+                                                    $anyNonGift = 1;
+                                                }
 
                                                 switch($beerType)
                                                 {
@@ -206,6 +219,8 @@ include("connection.php");
                                                 echo "    <li>&mdash;</li><li><i class=\"bi bi-box-seam\"></i> $res_numCrates Harass</li>\n";
                                             }
 
+                                            echo "    <li><i class=\"bi bi-hash\"></i> total $totalNumBottles Flaschen</li>\n";
+
                                             echo "        </ul>\n";
                                             echo "    </td>\n";
 
@@ -222,22 +237,28 @@ include("connection.php");
                                             {
                                                 echo "        <li><i style=\"color:red;\" class=\"bi bi-x\"></i>noch nicht geliefert</li>\n";
                                             }
-                                            if ($res_paymentStatusId == 1)
+
+                                            // any orderitem which is not a gift?
+                                            if ($anyNonGift == 1)
                                             {
-                                                echo "        <li><i style=\"color:green;\" class=\"bi bi-check\"></i>bezahlt</li>\n";
+                                                if ($res_paymentStatusId == 1)
+                                                {
+                                                    echo "        <li><i style=\"color:green;\" class=\"bi bi-check\"></i>bezahlt</li>\n";
+                                                }
+                                                else
+                                                {
+                                                    echo "        <li><i style=\"color:red;\" class=\"bi bi-x\"></i>noch nicht bezahlt</li>\n";
+                                                }
+                                                if ($res_bankaccountStatusId == 1)
+                                                {
+                                                    echo "        <li><i style=\"color:green;\" class=\"bi bi-check\"></i>Geld auf Konto</li>\n";
+                                                }
+                                                else
+                                                {
+                                                    echo "        <li><i style=\"color:red;\" class=\"bi bi-x\"></i>Geld noch nicht auf Konto</li>\n";
+                                                }
                                             }
-                                            else
-                                            {
-                                                echo "        <li><i style=\"color:red;\" class=\"bi bi-x\"></i>noch nicht bezahlt</li>\n";
-                                            }
-                                            if ($res_bankaccountStatusId == 1)
-                                            {
-                                                echo "        <li><i style=\"color:green;\" class=\"bi bi-check\"></i>Geld auf Konto</li>\n";
-                                            }
-                                            else
-                                            {
-                                                echo "        <li><i style=\"color:red;\" class=\"bi bi-x\"></i>Geld noch nicht auf Konto</li>\n";
-                                            }
+
                                             if ($res_numCrates > 0)
                                             {
                                                 if ($res_crateStatusId == 1)
