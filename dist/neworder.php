@@ -269,7 +269,7 @@ function getBeertypeSelection()
                                 <tr valign="top">
                                     <td>Preis (CHF):</td>
                                     <td>
-                                        <input name="price" type="number" id="price" size="2" required>
+                                        <input name="price" type="number" id="price" size="2" min="0" step="0.05" required>
                                         <ul>
                                             <span style="color:gray"><li>Preis inkl. Harassendepot (10.-/Harass)</li></span>
                                             <span style="color:gray"><li>Berechneter Preis: <span id="calculatedPrice"></span></li></span>
