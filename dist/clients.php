@@ -101,6 +101,7 @@ include("connection.php");
                                         <tr>
                                             <th>Kunde seit</th>
                                             <th>Name</th>
+                                            <th>Firma</th>
                                             <th>Wiederverkäufer</th>
                                             <th>E-mail</th>
                                             <th>Telefon/Mobile</th>
@@ -119,22 +120,27 @@ include("connection.php");
                                             $res_date = $result['createDate'];
                                             $res_prename = $result['prename'];
                                             $res_lastname = $result['lastname'];
+                                            $res_company = $result['company'];
                                             $res_isReseller = $result['isReseller'];
                                             $res_email = $result['email'];
                                             $res_phone = $result['phone'];
                                             $res_address = $result['address'];
+                                            $res_billingAddress = $result['billingAddress'];
                                             $res_userId = $result['userId'];
                                             $res_notes = $result['notes'];
+
+                                            $res_billingAddressString = ($res_billingAddress == '') ? "" : "<br><b>Rechnungsadresse:</b> $res_billingAddress";
 
                                             echo "<tr>\n";
                                             echo "    <td>$res_date</td>\n";
                                             echo "    <td>$res_prename $res_lastname</td>\n";
+                                            echo "    <td>$res_company</td>\n";
 
                                             $resellerFlag = ($res_isReseller) ? "<i class=\"bi bi-star-fill\" style=\"color: #e8e004;\"></i>" : '';
                                             echo "    <td>$resellerFlag</td>\n";
                                             echo "    <td>$res_email</td>\n";
                                             echo "    <td>$res_phone</td>\n";
-                                            echo "    <td>$res_address</td>\n";
+                                            echo "    <td>$res_address $res_billingAddressString</td>\n";
 
                                             // get name for userId
                                             $sqlUser = "SELECT * FROM users WHERE id = $res_userId";
