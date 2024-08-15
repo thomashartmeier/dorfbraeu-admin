@@ -87,34 +87,48 @@ include("connection.php");
             <div id="layoutSidenav_content">
                 <main>
                     <?php
-                    $prename = $_POST['prename'];
-                    $lastname = $_POST['lastname'];
-                    $isReseller = $_POST['isReseller'];
-                    $email = $_POST['email'];
-                    $phone = $_POST['phone'];
-                    $address = $_POST['address'];
-                    $notes = $_POST['notes'];
+                    $submitted = $_POST['submitted'];
 
-                    if (empty($prename) && empty($lastname) && empty($email) && empty($phone) && empty($address))
+                    if (!empty($submitted))
                     {
-                        // nothing to say
+                        // the form was submitted, so we check for valid form data first
+                        $prename = $_POST['prename'];
+                        $lastname = $_POST['lastname'];
+
+                        // we need at least first- or lastname
+                        if (empty($prename) && empty($lastname))
+                        {
+                            echo "<p style=\"background-color:#E6B7B1;\">Brauche mindestens Vor- oder Nachname! <i class=\"bi bi-hand-thumbs-down-fill\"></i></p>";
+                        }
+                        else
+                        {
+                            // all good, we have valid form data and can create a new database entry
+
+                            $isReseller = $_POST['isReseller'];
+                            $email = $_POST['email'];
+                            $phone = $_POST['phone'];
+                            $address = $_POST['address'];
+                            $notes = $_POST['notes'];
+
+                            $createDate = date("Y-m-d");
+
+                            $sql = "INSERT INTO clients (createDate,    prename,    lastname,    isReseller,  email,    phone,    address,    userId,  notes) VALUES
+                                                        ('$createDate', '$prename', '$lastname', $isReseller, '$email', '$phone', '$address', 0, '$notes')";
+
+                            $query = mysqli_query($conn, $sql) or die("Could not run SQL query.");
+
+                            echo "<p style=\"background-color:powderblue;\">Neuer Kundeneintrag dazugefügt <i class=\"bi bi-hand-thumbs-up-fill\"></i></p>";
+                        }
                     }
                     else
                     {
-                        $createDate = date("Y-m-d");
-
-                        $sql = "INSERT INTO clients (createDate,    prename,    lastname,    isReseller,  email,    phone,    address,    userId,  notes) VALUES
-                                                    ('$createDate', '$prename', '$lastname', $isReseller, '$email', '$phone', '$address', 0, '$notes')";
-
-                        $query = mysqli_query($conn, $sql) or die("Could not run SQL query.");
-
-                        echo "<p style=\"background-color:powderblue;\">Neuer Kundeneintrag dazugefügt <i class=\"bi bi-hand-thumbs-up-fill\"></i></p>";
+                        // nothing to say if form was not submitted yet
                     }
                     ?>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Neuer Kundeneintrag</h1>
                         <ul>
-                            <li>Felder dürfen leergelassen werden (bzw. nachträglich ergänzt werden). Es muss aber mindestens entweder Vorname, Nachname, E-mail, Telefonnummer oder Adresse ausgefüllt werden.</li>
+                            <li>Felder dürfen leergelassen werden (bzw. nachträglich ergänzt werden). Es muss aber mindestens Vor- oder Nachname ausgefüllt werden.</li>
                         </ul>
                         <form id="formIdentifier" method="POST" action="./newclient.php">
                             <table>
@@ -162,6 +176,7 @@ include("connection.php");
                                 </tr>
                             </table>
                             <hr>
+                            <input type='hidden' value='1' name='submitted'>
                             <p><input type="submit" value="Speichern"></p>
                         </form>
                     </div>
