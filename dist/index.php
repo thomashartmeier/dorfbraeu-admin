@@ -155,6 +155,7 @@ include("connection.php");
                         </div>
                     </div>
                     <div class="container-fluid px-4">
+                        <div class="row"><div class="col-xl-6">
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
@@ -209,6 +210,7 @@ include("connection.php");
                                 </table>
                             </div>
                         </div>
+                        </div></div>
                     </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
