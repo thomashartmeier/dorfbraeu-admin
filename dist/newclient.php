@@ -104,6 +104,7 @@ include("connection.php");
                         {
                             // all good, we have valid form data and can create a new database entry
 
+                            $company = $_POST['company'];
                             $isReseller = $_POST['isReseller'];
                             $email = $_POST['email'];
                             $phone = $_POST['phone'];
@@ -113,8 +114,8 @@ include("connection.php");
 
                             $createDate = date("Y-m-d");
 
-                            $sql = "INSERT INTO clients (createDate,    prename,    lastname,    isReseller,  email,    phone,    address,    billingAddress,    userId,  notes) VALUES
-                                                        ('$createDate', '$prename', '$lastname', $isReseller, '$email', '$phone', '$address', '$billingAddress', 0,       '$notes')";
+                            $sql = "INSERT INTO clients (createDate,    prename,    lastname,    company,    isReseller,  email,    phone,    address,    billingAddress,    userId,  notes) VALUES
+                                                        ('$createDate', '$prename', '$lastname', '$company', $isReseller, '$email', '$phone', '$address', '$billingAddress', 0,       '$notes')";
 
                             $query = mysqli_query($conn, $sql) or die("Could not run SQL query.");
 
@@ -143,6 +144,12 @@ include("connection.php");
                                     <td>Nachname:</td>
                                     <td>
                                         <input name="lastname" type="text">
+                                    </td>
+                                </tr>
+                                <tr valign="top">
+                                    <td>Firma:</td>
+                                    <td>
+                                        <input name="company" type="text">
                                     </td>
                                 </tr>
                                 <tr valign="top">
