@@ -60,9 +60,13 @@ include("connection.php");
                                 Preisgestaltung
                             </a>
                             <div class="sb-sidenav-menu-heading">Edit</div>
-                            <a class="nav-link" href="orders.php">
+                            <a class="nav-link" href="openorders.php">
                                 <div class="sb-nav-link-icon"><i class="bi bi-cart-fill"></i></div>
-                                Bestellungen
+                                Offene Bestellungen
+                            </a>
+                            <a class="nav-link" href="allorders.php">
+                                <div class="sb-nav-link-icon"><i class="bi bi-cart-fill"></i></div>
+                                Alle Bestellungen
                             </a>
                             <a class="nav-link" href="neworder.php">
                                 <div class="sb-nav-link-icon"><i class="bi bi-plus-circle"></i></div>
