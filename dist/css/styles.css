@@ -8141,6 +8141,26 @@ textarea.form-control-lg {
   --bs-text-opacity: 1;
 }
 
+.bg-freakycraft {
+  background-color: #ed1c24;
+}
+
+.bg-lovelyamber {
+  background-color: #f46a1e;
+}
+
+.bg-frischesmais {
+  background-color: #e8e004;
+}
+
+.bg-funkyipa {
+  background-color: #4cc070;
+}
+
+.bg-vollesdinkel {
+  background-color: #b746aa;
+}
+
 .bg-primary {
   --bs-bg-opacity: 1;
   background-color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity)) !important;
