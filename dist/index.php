@@ -166,7 +166,7 @@ if (!isset($_SESSION['username']))
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                Anzahl verkaufter Flaschen pro Kunde
+                                Anzahl verkaufter Flaschen und ausgeliehene Harasse pro Kunde
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
@@ -174,6 +174,7 @@ if (!isset($_SESSION['username']))
                                         <tr>
                                             <th>Name</th>
                                             <th>Anzahl Flaschen</th>
+                                            <th>Ausgeliehene (noch nicht zurückgebrachte) Harasse</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -185,6 +186,7 @@ if (!isset($_SESSION['username']))
                                         {
                                             // count how many bottles this client has bought so far
                                             $clientQuantity = 0;
+                                            $clientCrates = 0;
                                             $res_clientId = $result['id'];
                                             $res_prename = $result['prename'];
                                             $res_lastname = $result['lastname'];
@@ -196,6 +198,7 @@ if (!isset($_SESSION['username']))
                                             while ($resultOrders = mysqli_fetch_assoc($queryOrders))
                                             {
                                                 $res_orderId = $resultOrders['id'];
+                                                $res_numCrates = $resultOrders['numCrates'];
 
                                                 // get all order items for this order
                                                 $sqlOrderItems = "SELECT * FROM orderItems WHERE orderId = $res_orderId";
@@ -205,11 +208,14 @@ if (!isset($_SESSION['username']))
                                                 {
                                                     $clientQuantity += $resultOrderItems['quantity'];
                                                 }
+
+                                                $clientCrates += $res_numCrates;
                                             }
 
                                             echo "<tr>\n";
                                             echo "    <td>$res_prename $res_lastname</td>\n";
                                             echo "    <td>$clientQuantity</td>\n";
+                                            echo "    <td>$clientCrates</td>\n";
                                             echo "</tr>\n";
                                         }
                                         ?>
