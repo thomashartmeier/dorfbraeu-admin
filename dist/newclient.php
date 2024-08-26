@@ -48,8 +48,10 @@ if (!isset($_SESSION['username']))
 
                             $createDate = date("Y-m-d");
 
+                            $userId = $_SESSION['id'];
+
                             $sql = "INSERT INTO clients (createDate,    prename,    lastname,    company,    isReseller,  email,    phone,    address,    billingAddress,    userId,          notes) VALUES
-                                                        ('$createDate', '$prename', '$lastname', '$company', $isReseller, '$email', '$phone', '$address', '$billingAddress', $_SESSION['id'], '$notes')";
+                                                        ('$createDate', '$prename', '$lastname', '$company', $isReseller, '$email', '$phone', '$address', '$billingAddress', $userId, '$notes')";
 
                             $query = mysqli_query($conn, $sql) or die("Could not run SQL query.");
 
