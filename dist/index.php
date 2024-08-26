@@ -498,11 +498,11 @@ if (!isset($_SESSION['username']))
                                 <div class="card bg-frischesmais text-dark mb-4">
                                     <div class="card-body"><b>Frisches Mais</b></div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <ul>
+                                        <span style="font-size: 0.75rem">
                                             <li>Stock: <?php echo getBottlesRemaining(0); ?> Flaschen</li>
                                             <li>Total gebraut: <?php echo getBottlesBrewed(0); ?> Flaschen</li>
-                                            <li>Total verkauft: <?php echo getBottlesSold(0); ?> Flaschen</li>
-                                        </ul>
+                                            <li>Total verkauft+verschenkt: <?php echo getBottlesSold(0); ?> Flaschen</li>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -510,11 +510,11 @@ if (!isset($_SESSION['username']))
                                 <div class="card bg-vollesdinkel text-white mb-4">
                                     <div class="card-body"><b>Volles Dinkel</b></div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <ul>
+                                        <span style="font-size: 0.75rem">
                                             <li>Stock: <?php echo getBottlesRemaining(3); ?> Flaschen</li>
                                             <li>Total gebraut: <?php echo getBottlesBrewed(3); ?> Flaschen</li>
-                                            <li>Total verkauft: <?php echo getBottlesSold(3); ?> Flaschen</li>
-                                        </ul>
+                                            <li>Total verkauft+verschenkt: <?php echo getBottlesSold(3); ?> Flaschen</li>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -522,11 +522,11 @@ if (!isset($_SESSION['username']))
                                 <div class="card bg-funkyipa text-white mb-4">
                                     <div class="card-body"><b>Funky IPA</b></div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <ul>
+                                        <span style="font-size: 0.75rem">
                                             <li>Stock: <?php echo getBottlesRemaining(2); ?> Flaschen</li>
                                             <li>Total gebraut: <?php echo getBottlesBrewed(2); ?> Flaschen</li>
-                                            <li>Total verkauft: <?php echo getBottlesSold(2); ?> Flaschen</li>
-                                        </ul>
+                                            <li>Total verkauft+verschenkt: <?php echo getBottlesSold(2); ?> Flaschen</li>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -534,11 +534,11 @@ if (!isset($_SESSION['username']))
                                 <div class="card bg-lovelyamber text-white mb-4">
                                     <div class="card-body"><b>Lovely Amber</b></div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <ul>
+                                        <span style="font-size: 0.75rem">
                                             <li>Stock: <?php echo getBottlesRemaining(4); ?> Flaschen</li>
                                             <li>Total gebraut: <?php echo getBottlesBrewed(4); ?> Flaschen</li>
-                                            <li>Total verkauft: <?php echo getBottlesSold(4); ?> Flaschen</li>
-                                        </ul>
+                                            <li>Total verkauft+verschenkt: <?php echo getBottlesSold(4); ?> Flaschen</li>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -546,22 +546,34 @@ if (!isset($_SESSION['username']))
                                 <div class="card bg-freakycraft text-white mb-4">
                                     <div class="card-body"><b>Freaky Craft</b></div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <ul>
+                                        <span style="font-size: 0.75rem">
                                             <li>Stock: <?php echo getBottlesRemaining(1); ?> Flaschen</li>
                                             <li>Total gebraut: <?php echo getBottlesBrewed(1); ?> Flaschen</li>
-                                            <li>Total verkauft: <?php echo getBottlesSold(1); ?> Flaschen</li>
-                                        </ul>
+                                            <li>Total verkauft+verschenkt: <?php echo getBottlesSold(1); ?> Flaschen</li>
+                                        </span>
                                     </div>
-                                    <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
                                 </div>
                             </div>
-                            <div class="col-xl-6">
+                        </div>
+                        <div class="row">
+                            <div>
                                 <div class="card mb-4">
                                     <div class="card-header">
-                                        <i class="fas fa-chart-bar me-1"></i>
-                                        Bar Chart Example
+                                        <i class="fas fa-chart-area me-1"></i>
+                                        Flaschen abgefüllt über das aktuelle Jahr
                                     </div>
-                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
+                                    <div class="card-body"><canvas id="bottlesBottled" width="100%" height="20"></canvas></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div>
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-chart-area me-1"></i>
+                                        Flaschen verkauft+verschenkt über das aktuelle Jahr
+                                    </div>
+                                    <div class="card-body"><canvas id="bottlesSold" width="100%" height="20"></canvas></div>
                                 </div>
                             </div>
                         </div>
