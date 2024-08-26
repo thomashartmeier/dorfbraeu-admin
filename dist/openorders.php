@@ -22,7 +22,9 @@ if (!isset($_SESSION['username']))
                 <main>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Offene Bestellungen</h1>
-                        <p><a class="btn btn-primary" href="neworder.php"><i class="bi bi-cart-plus"></i> Neue Bestellung</a></p>
+                        <ul>
+                            <span style="color:gray"><li>Bestellungen können nur von der Person editiert werden, die die entsprechende Bestellung erstellt hat.</li></span>
+                        </ul>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
@@ -41,11 +43,12 @@ if (!isset($_SESSION['username']))
                                             <th>Preis</th>
                                             <th>Status</th>
                                             <th>Notiz</th>
+                                            <th>Edit</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $sql = "SELECT * FROM orders WHERE deliveryStatusId=0 OR paymentStatusId=0 OR bankaccountStatusId=0 OR crateStatusId=0";
+                                        $sql = "SELECT * FROM orders WHERE deliveryStatusId=0 OR (paymentMethod=1 AND invoiceStatusId=0) OR paymentStatusId=0 OR bankaccountStatusId=0";
                                         $query = mysqli_query($conn, $sql) or die("Could not run SQL query.");
 
                                         while ($result = mysqli_fetch_assoc($query))
@@ -57,7 +60,6 @@ if (!isset($_SESSION['username']))
                                             $res_clientId = $result['clientId'];
                                             $res_price = $result['price'];
                                             $res_numCrates = $result['numCrates'];
-                                            $res_crateStatusId = $result['crateStatusId'];
                                             $res_deliveryStatusId = $result['deliveryStatusId'];
                                             $res_paymentStatusId = $result['paymentStatusId'];
                                             $res_bankaccountStatusId = $result['bankaccountStatusId'];
@@ -156,9 +158,24 @@ if (!isset($_SESSION['username']))
 
                                             echo "    <td>$res_price CHF</td>\n";
 
-                                            // status
                                             echo "    <td>\n";
                                             echo "        <ul style=\"list-style-type:none;\">\n";
+
+                                            // invoice status
+                                            // only care about invoice status if payment method is invoice (=1)
+                                            if ($res_paymentMethod == 1)
+                                            {
+                                                if ($res_invoiceStatusId == 1)
+                                                {
+                                                    echo "        <li><i style=\"color:green;\" class=\"bi bi-check\"></i>Rechnung geschickt</li>\n";
+                                                }
+                                                else
+                                                {
+                                                    echo "        <li><i style=\"color:red;\" class=\"bi bi-x\"></i>Rechnung noch nicht geschickt</li>\n";
+                                                }
+                                            }
+
+                                            // delivery status
                                             if ($res_deliveryStatusId == 1)
                                             {
                                                 echo "        <li><i style=\"color:green;\" class=\"bi bi-check\"></i>geliefert</li>\n";
@@ -168,6 +185,7 @@ if (!isset($_SESSION['username']))
                                                 echo "        <li><i style=\"color:red;\" class=\"bi bi-x\"></i>noch nicht geliefert</li>\n";
                                             }
 
+                                            // payment status
                                             // any orderitem which is not a gift?
                                             if ($anyNonGift == 1)
                                             {
@@ -189,20 +207,20 @@ if (!isset($_SESSION['username']))
                                                 }
                                             }
 
-                                            if ($res_numCrates > 0)
-                                            {
-                                                if ($res_crateStatusId == 1)
-                                                {
-                                                    echo "        <li><i style=\"color:green;\" class=\"bi bi-check\"></i>Harass zurück</li>\n";
-                                                }
-                                                else
-                                                {
-                                                    echo "        <li><i style=\"color:red;\" class=\"bi bi-x\"></i>Harass noch nicht zurück</li>\n";
-                                                }
-                                            }
                                             echo "        </ul>\n";
                                             echo "    </td>\n";
                                             echo "    <td>$res_notes</td>\n";
+
+                                            // only allow edit for user who created this order
+                                            if ($res_userId == $_SESSION['id'])
+                                            {
+                                                echo "    <td><a href=\"editorder.php?orderid=$res_id\">edit</a></td>\n";
+                                            }
+                                            else
+                                            {
+                                                echo "    <td></td>\n";
+                                            }
+
                                             echo "</tr>\n";
                                         }
                                         ?>
