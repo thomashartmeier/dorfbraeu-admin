@@ -147,8 +147,340 @@ if (!isset($_SESSION['username']))
 
 <!DOCTYPE html>
 <html lang="en">
+    <script>
+        function drawgraph()
+        {
+            // bottles bottled
+            var ctx = document.getElementById("bottlesBottled");
+            var myLineChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [
+                    <?php
+                    for ($week = 0; $week < 54; $week++)
+                    {
+                        echo "\"Woche $week\",";
+                    }
+                    ?>
+                    ],
+                datasets: [{
+                label: "Flaschen Frisches Mais",
+                lineTension: 0.3,
+                backgroundColor: "rgba(255,255,255,0)",
+                borderColor: "rgba(232, 224, 4, 1)",
+                pointRadius: 5,
+                pointBackgroundColor: "rgba(232, 224, 4, 1)",
+                pointBorderColor: "rgba(255,255,255,0.8)",
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(232, 224, 4, 1)",
+                pointHitRadius: 50,
+                pointBorderWidth: 2,
+                data: [
+                    <?php
+                    $bottlesBottled = getBottlesBottledCurrentYear(0);
+
+                    for ($week = 0; $week < 54; $week++)
+                    {
+                        echo $bottlesBottled[$week];
+                        echo ",";
+                    }
+                    ?>
+                    ],
+                },
+                {
+                label: "Flaschen Freaky Craft",
+                lineTension: 0.3,
+                backgroundColor: "rgba(255,255,255,0)",
+                borderColor: "rgba(237, 28, 36, 1)",
+                pointRadius: 5,
+                pointBackgroundColor: "rgba(237, 28, 36, 1)",
+                pointBorderColor: "rgba(255,255,255,0.8)",
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(237, 28, 36, 1)",
+                pointHitRadius: 50,
+                pointBorderWidth: 2,
+                data: [
+                    <?php
+                    $bottlesBottled = getBottlesBottledCurrentYear(1);
+
+                    for ($week = 0; $week < 54; $week++)
+                    {
+                        echo $bottlesBottled[$week];
+                        echo ",";
+                    }
+                    ?>
+                    ],
+                },
+                {
+                label: "Flaschen Funky IPA",
+                lineTension: 0.3,
+                backgroundColor: "rgba(255,255,255,0)",
+                borderColor: "rgba(76, 192, 112, 1)",
+                pointRadius: 5,
+                pointBackgroundColor: "rgba(76, 192, 112, 1)",
+                pointBorderColor: "rgba(255,255,255,0.8)",
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(76, 192, 112, 1)",
+                pointHitRadius: 50,
+                pointBorderWidth: 2,
+                data: [
+                    <?php
+                    $bottlesBottled = getBottlesBottledCurrentYear(2);
+
+                    for ($week = 0; $week < 54; $week++)
+                    {
+                        echo $bottlesBottled[$week];
+                        echo ",";
+                    }
+                    ?>
+                    ],
+                },
+                {
+                label: "Flaschen Volles Dinkel",
+                lineTension: 0.3,
+                backgroundColor: "rgba(255,255,255,0)",
+                borderColor: "rgba(183, 70, 170, 1)",
+                pointRadius: 5,
+                pointBackgroundColor: "rgba(183, 70, 170, 1)",
+                pointBorderColor: "rgba(255,255,255,0.8)",
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(183, 70, 170, 1)",
+                pointHitRadius: 50,
+                pointBorderWidth: 2,
+                data: [
+                    <?php
+                    $bottlesBottled = getBottlesBottledCurrentYear(3);
+
+                    for ($week = 0; $week < 54; $week++)
+                    {
+                        echo $bottlesBottled[$week];
+                        echo ",";
+                    }
+                    ?>
+                    ],
+                },
+                {
+                label: "Flaschen Lovely Amber",
+                lineTension: 0.3,
+                backgroundColor: "rgba(255,255,255,0)",
+                borderColor: "rgba(244, 106, 30, 1)",
+                pointRadius: 5,
+                pointBackgroundColor: "rgba(244, 106, 30, 1)",
+                pointBorderColor: "rgba(255,255,255,0.8)",
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(244, 106, 30, 1)",
+                pointHitRadius: 50,
+                pointBorderWidth: 2,
+                data: [
+                    <?php
+                    $bottlesBottled = getBottlesBottledCurrentYear(4);
+
+                    for ($week = 0; $week < 54; $week++)
+                    {
+                        echo $bottlesBottled[$week];
+                        echo ",";
+                    }
+                    ?>
+                    ],
+                }],
+            },
+            options: {
+                scales: {
+                xAxes: [{
+                    time: {
+                    unit: 'date'
+                    },
+                    gridLines: {
+                    display: false
+                    },
+                    ticks: {
+                    maxTicksLimit: 7
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                    min: 0,
+                    //max: 40000,
+                    //maxTicksLimit: 5
+                    },
+                    gridLines: {
+                    color: "rgba(0, 0, 0, .125)",
+                    }
+                }],
+                },
+                legend: {
+                display: false
+                }
+            }
+            });
+
+            // bottles sold
+            var ctx2 = document.getElementById("bottlesSold");
+            var myLineChart2 = new Chart(ctx2, {
+            type: 'line',
+            data: {
+                labels: [
+                    <?php
+                    for ($week = 0; $week < 54; $week++)
+                    {
+                        echo "\"Woche $week\",";
+                    }
+                    ?>
+                    ],
+                datasets: [{
+                label: "Flaschen Frisches Mais",
+                lineTension: 0.3,
+                backgroundColor: "rgba(255,255,255,0)",
+                borderColor: "rgba(232, 224, 4, 1)",
+                pointRadius: 5,
+                pointBackgroundColor: "rgba(232, 224, 4, 1)",
+                pointBorderColor: "rgba(255,255,255,0.8)",
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(232, 224, 4, 1)",
+                pointHitRadius: 50,
+                pointBorderWidth: 2,
+                data: [
+                    <?php
+                    $bottlesSold = getBottlesSoldCurrentYear(0);
+
+                    for ($week = 0; $week < 54; $week++)
+                    {
+                        echo $bottlesSold[$week];
+                        echo ",";
+                    }
+                    ?>
+                    ],
+                },
+                {
+                label: "Flaschen Freaky Craft",
+                lineTension: 0.3,
+                backgroundColor: "rgba(255,255,255,0)",
+                borderColor: "rgba(237, 28, 36, 1)",
+                pointRadius: 5,
+                pointBackgroundColor: "rgba(237, 28, 36, 1)",
+                pointBorderColor: "rgba(255,255,255,0.8)",
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(237, 28, 36, 1)",
+                pointHitRadius: 50,
+                pointBorderWidth: 2,
+                data: [
+                    <?php
+                    $bottlesSold = getBottlesSoldCurrentYear(1);
+
+                    for ($week = 0; $week < 54; $week++)
+                    {
+                        echo $bottlesSold[$week];
+                        echo ",";
+                    }
+                    ?>
+                    ],
+                },
+                {
+                label: "Flaschen Funky IPA",
+                lineTension: 0.3,
+                backgroundColor: "rgba(255,255,255,0)",
+                borderColor: "rgba(76, 192, 112, 1)",
+                pointRadius: 5,
+                pointBackgroundColor: "rgba(76, 192, 112, 1)",
+                pointBorderColor: "rgba(255,255,255,0.8)",
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(76, 192, 112, 1)",
+                pointHitRadius: 50,
+                pointBorderWidth: 2,
+                data: [
+                    <?php
+                    $bottlesSold = getBottlesSoldCurrentYear(2);
+
+                    for ($week = 0; $week < 54; $week++)
+                    {
+                        echo $bottlesSold[$week];
+                        echo ",";
+                    }
+                    ?>
+                    ],
+                },
+                {
+                label: "Flaschen Volles Dinkel",
+                lineTension: 0.3,
+                backgroundColor: "rgba(255,255,255,0)",
+                borderColor: "rgba(183, 70, 170, 1)",
+                pointRadius: 5,
+                pointBackgroundColor: "rgba(183, 70, 170, 1)",
+                pointBorderColor: "rgba(255,255,255,0.8)",
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(183, 70, 170, 1)",
+                pointHitRadius: 50,
+                pointBorderWidth: 2,
+                data: [
+                    <?php
+                    $bottlesSold = getBottlesSoldCurrentYear(3);
+
+                    for ($week = 0; $week < 54; $week++)
+                    {
+                        echo $bottlesSold[$week];
+                        echo ",";
+                    }
+                    ?>
+                    ],
+                },
+                {
+                label: "Flaschen Lovely Amber",
+                lineTension: 0.3,
+                backgroundColor: "rgba(255,255,255,0)",
+                borderColor: "rgba(244, 106, 30, 1)",
+                pointRadius: 5,
+                pointBackgroundColor: "rgba(244, 106, 30, 1)",
+                pointBorderColor: "rgba(255,255,255,0.8)",
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(244, 106, 30, 1)",
+                pointHitRadius: 50,
+                pointBorderWidth: 2,
+                data: [
+                    <?php
+                    $bottlesSold = getBottlesSoldCurrentYear(4);
+
+                    for ($week = 0; $week < 54; $week++)
+                    {
+                        echo $bottlesSold[$week];
+                        echo ",";
+                    }
+                    ?>
+                    ],
+                }],
+            },
+            options: {
+                scales: {
+                xAxes: [{
+                    time: {
+                    unit: 'date'
+                    },
+                    gridLines: {
+                    display: false
+                    },
+                    ticks: {
+                    maxTicksLimit: 7
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                    min: 0,
+                    //max: 40000,
+                    //maxTicksLimit: 5
+                    },
+                    gridLines: {
+                    color: "rgba(0, 0, 0, .125)",
+                    }
+                }],
+                },
+                legend: {
+                display: false
+                }
+            }
+            });
+        }
+    </script>
     <?php include "./inc/head.html" ?>
-    <body class="sb-nav-fixed">
+    <body class="sb-nav-fixed" onload="drawgraph()">
         <?php include "./inc/bars.html" ?>
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
