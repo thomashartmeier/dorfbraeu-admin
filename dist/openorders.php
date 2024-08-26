@@ -16,7 +16,7 @@ if (!isset($_SESSION['username']))
         <?php include "./inc/bars.html" ?>
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
-                <?php include "./inc/sidenav.html" ?>
+                <?php include "./inc/sidenav.php" ?>
             </div>
             <div id="layoutSidenav_content">
                 <main>
