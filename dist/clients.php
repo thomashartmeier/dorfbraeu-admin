@@ -21,8 +21,10 @@ if (!isset($_SESSION['username']))
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Kunden</h1>
-                        <p><a class="btn btn-primary" href="newclient.php"><i class="bi bi-cart-plus"></i> Neuer Kundeneintrag</a></p>
+                        <h1 class="mt-4">Alle Kunden</h1>
+                        <ul>
+                            <span style="color:gray"><li>Kundeneinträge können nur von der Person editiert werden, die den entsprechenden Kundeneintrag erstellt hat.</li></span>
+                        </ul>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
@@ -42,6 +44,7 @@ if (!isset($_SESSION['username']))
                                             <th>Adresse</th>
                                             <th>Erstellt von</th>
                                             <th>Notiz</th>
+                                            <th>Edit</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -51,6 +54,7 @@ if (!isset($_SESSION['username']))
 
                                         while ($result = mysqli_fetch_assoc($query))
                                         {
+                                            $res_id = $result['id'];
                                             $res_date = $result['createDate'];
                                             $res_prename = $result['prename'];
                                             $res_lastname = $result['lastname'];
@@ -84,6 +88,17 @@ if (!isset($_SESSION['username']))
                                             echo "    <td>$userName</td>\n";
 
                                             echo "    <td>$res_notes</td>\n";
+
+                                            // only allow edit for user who created this order
+                                            if ($res_userId == $_SESSION['id'])
+                                            {
+                                                echo "    <td><a href=\"editclient.php?clientid=$res_id\">edit</a></td>\n";
+                                            }
+                                            else
+                                            {
+                                                echo "    <td></td>\n";
+                                            }
+
                                             echo "</tr>\n";
                                         }
                                         ?>
