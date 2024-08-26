@@ -66,6 +66,79 @@ function getBottlesSold($input_beerId)
     return $totalNumBottles;
 }
 
+function getBottlesSoldCurrentYear($input_beerId)
+{
+    global $conn;
+
+    $numBottlesSold = [];
+
+    // loop over all weeks of the year
+    for ($week = 0; $week < 54; $week++)
+    {
+        $numBottlesThisWeek = 0;
+
+        // loop over all orders and sum the order items of this beer type
+        $sql = "SELECT * FROM orders WHERE YEAR(createDate) = YEAR(Now()) AND WEEK(createDate) = $week;";
+        $query = mysqli_query($conn, $sql) or die("Could not run SQL query.");
+
+        while ($result = mysqli_fetch_assoc($query))
+        {
+            $res_id = $result['id'];
+
+            // get all the order items that belong to that order
+            $sqlItem = "SELECT * FROM orderItems WHERE orderId = $res_id";
+            $queryItem = mysqli_query($conn, $sqlItem) or die("Could not run SQL query.");
+
+            while ($resultItem = mysqli_fetch_assoc($queryItem))
+            {
+                $orderItems_beerId = $resultItem['beerId'];
+                $orderItems_quantity = $resultItem['quantity'];
+
+                if ($orderItems_beerId == $input_beerId)
+                {
+                    $numBottlesThisWeek += $orderItems_quantity;
+                }
+            }
+        }
+
+        $numBottlesSold[$week] = $numBottlesThisWeek;
+    }
+
+    return $numBottlesSold;
+}
+
+function getBottlesBottledCurrentYear($input_beerId)
+{
+    global $conn;
+
+    $numBottlesBottled = [];
+
+    // loop over all weeks of the year
+    for ($week = 0; $week < 54; $week++)
+    {
+        $numBottlesThisWeek = 0;
+
+        // loop over all brews and sum the number of bottles of this beer type
+        $sql = "SELECT * FROM brews WHERE YEAR(bottleDate) = YEAR(Now()) AND WEEK(bottleDate) = $week;";
+        $query = mysqli_query($conn, $sql) or die("Could not run SQL query.");
+
+        while ($result = mysqli_fetch_assoc($query))
+        {
+            $brews_beerId = $result['beerId'];
+            $brews_numBottles = $result['numBottles'];
+
+            if ($brews_beerId == $input_beerId)
+            {
+                $numBottlesThisWeek += $brews_numBottles;
+            }
+        }
+
+        $numBottlesBottled[$week] = $numBottlesThisWeek;
+    }
+
+    return $numBottlesBottled;
+}
+
 if (!isset($_SESSION['username']))
 {
     header("location:login.php");
