@@ -26,7 +26,7 @@ function getCustomerSelection()
             $resellerFlag = ' (*)';
         }
 
-        $customerList .= "<option value=\"${res_id}\">$res_lastname, ${res_prename}${resellerFlag}</option>\n";
+        $customerList .= "<option value=\"${res_id}\">$res_lastname, ${res_prename}${resellerFlag}</option>";
     }
 
     return $customerList;
@@ -75,10 +75,7 @@ if (!isset($_SESSION['username']))
             var newrow = document.createElement("tr");
             newrow.innerHTML  = "<td><input type='number' name='numBottles[]' size='2' onchange='calculatePrice()' min='1' required></td>\n \
             <td>\n \
-                <select name='bierselect[]' onchange='calculatePrice()'>\n \
-                    <?php
-                        echo getBeertypeSelection();
-                    ?>
+                <select name='bierselect[]' onchange='calculatePrice()'><?php echo getBeertypeSelection(); ?>\n \
                 </select>\n \
             </td>\n \
             <td style=\"text-align:center\"><input type='hidden' value='0' name='giftselect[" + counter + "]'><input type='checkbox' name='giftselect[" + counter + "]' value='1' onchange='calculatePrice()' /></td>";
@@ -114,6 +111,7 @@ if (!isset($_SESSION['username']))
                         $client = $_POST['customers'];
                         $numCrates = $_POST['numCrates'];
                         $notes = $_POST['notes'];
+                        $paymentMethod = $_POST['paymentMethod'];
 
                         // check if we have any non-gift item in the orderlist
                         $anyNonGift = 0;
@@ -136,9 +134,6 @@ if (!isset($_SESSION['username']))
                         // if we have any non-gift item, we need a payment and therefore the payment status is set to 'open'
                         $paymentStatus = ($anyNonGift == 1) ? 0 : 1;
 
-                        // if we have any crates to deliver, the crate status is set to 'open' (i.e. we need them back)
-                        $crateStatus = ($numCrates > 0) ? 0 : 1;
-
                         // create order number
                         $orderNumber1 = rand(0, 999);
                         $orderNumber2 = rand(0, 999);
@@ -148,8 +143,10 @@ if (!isset($_SESSION['username']))
 
                         $createDate = date("Y-m-d");
 
-                        $sql = "INSERT INTO orders (orderNumber,          createDate,    userId, clientId, deliveryStatusId, paymentStatusId, bankaccountStatusId, price,  numCrates,  crateStatusId, notes) VALUES
-                                                   ('$orderNumberString', '$createDate', 0,      $client,  0,                $paymentStatus,  $paymentStatus,      $price, $numCrates, $crateStatus,  '$notes')";
+                        $userId = $_SESSION['id'];
+
+                        $sql = "INSERT INTO orders (orderNumber,          createDate,    userId,  clientId, paymentMethod,  deliveryStatusId, invoiceStatusId, paymentStatusId, bankaccountStatusId, price,  numCrates,  notes) VALUES
+                                                   ('$orderNumberString', '$createDate', $userId, $client,  $paymentMethod, 0,                0,               $paymentStatus,  $paymentStatus,      $price, $numCrates, '$notes')";
 
                         $query = mysqli_query($conn, $sql) or die("Could not run SQL query.");
 
@@ -162,7 +159,7 @@ if (!isset($_SESSION['username']))
                         {
                             $beerId = $arr_beerType[$i];
                             $quantity = $arr_numBottles[$i];
-                            $gift = $arr_gift[$i];
+                            $gift = $arr_gift[$i] ? '1' : '0';
 
                             $sqlOrderItem = "INSERT INTO orderItems (beerId,  containerId, quantity,  gift,  orderId) VALUES
                                                                     ($beerId, 0,           $quantity, $gift, $newOrderId)";
@@ -214,6 +211,15 @@ if (!isset($_SESSION['username']))
                                             <span style="color:gray"><li>Die hier eingetragene Anzahl Harasse soll der Menge "gelieferter minus zurückerhaltener" bei erfolgter Auslieferung entsprechen. Wichtig: Da es sein kann, dass bei der Auslieferung mehr Harasse zurückgekommen sind (von früheren Aufträgen) als ausgeliefert, kann dieses Feld auch negativ sein! Die Anzahl Harasse, die uns ein Kunde noch schuldet, kann im <a href="index.php">Dashboard</a> nachgeschaut werden.</li></span>
                                             <span style="color:gray"><li>Falls der Kunde nach einer Weile einfach den/die Harass(e) zurückgibt ohne eine neue Bestellung aufzugeben, kann seine letzte Bestellung editiert werden und dort das Feld "Anzahl Harasse" auf 0 gesetzt werden.</li></span>
                                         </ul>
+                                    </td>
+                                </tr>
+                                <tr valign="top">
+                                    <td>Bezahlart:</td>
+                                    <td>
+                                        <select name="paymentMethod">
+                                            <option value='0' size='2'>Kunde bezahlt direkt an dich (bar, Twint, ...)</option>
+                                            <option value='1' size='2'>Kunde bezahlt via Rechnung</option>
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr valign="top">
