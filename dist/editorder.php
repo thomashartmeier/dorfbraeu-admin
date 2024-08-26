@@ -39,7 +39,7 @@ function getCustomerSelection($input_clientId)
     return $customerList;
 }
 
-function getBeertypeSelection()
+function getBeertypeSelection($input_beerId)
 {
     global $conn;
 
@@ -53,7 +53,14 @@ function getBeertypeSelection()
         $res_id = $result['id'];
         $res_type = $result['type'];
 
-        $beertypeList .= "<option value='${res_id}' name='beertype${res_id}' id='beertype${res_id}' size='2'>$res_type</option>";
+        $selectedString = '';
+
+        if ($res_id == $input_beerId)
+        {
+            $selectedString = "selected='selected'";
+        }
+
+        $beertypeList .= "<option value='${res_id}' $selectedString name='beertype${res_id}' id='beertype${res_id}' size='2'>$res_type</option>";
     }
 
     return $beertypeList;
@@ -68,24 +75,26 @@ if (!isset($_SESSION['username']))
 <!DOCTYPE html>
 <html lang="en">
     <script>
-    var counter = 1;
-    var limit = 50;
+    var counter = 0;
+    var limit = 8;
 
-    function addInput(divName)
+    function addInput(divName, offsetInput)
     {
-        if (counter === limit)
+        var ix = offsetInput + counter;
+
+        if (ix === limit)
         {
-            alert("You have reached the limit of adding " + counter + " inputs");
+            alert("You have reached the limit of adding " + ix + " inputs");
         }
         else
         {
             var newrow = document.createElement("tr");
             newrow.innerHTML  = "<td><input type='number' name='numBottles[]' size='2' onchange='calculatePrice()' min='1' required></td>\n \
             <td>\n \
-                <select name='bierselect[]' onchange='calculatePrice()'><?php echo getBeertypeSelection(); ?>\n \
+                <select name='bierselect[]' onchange='calculatePrice()'><?php echo getBeertypeSelection(0); ?>\n \
                 </select>\n \
             </td>\n \
-            <td style=\"text-align:center\"><input type='hidden' value='0' name='giftselect[" + counter + "]'><input type='checkbox' name='giftselect[" + counter + "]' value='1' onchange='calculatePrice()' /></td>";
+            <td style=\"text-align:center\"><input type='hidden' value='0' name='giftselect[" + ix + "]'><input type='checkbox' name='giftselect[" + ix + "]' value='1' onchange='calculatePrice()' /></td>";
             document.getElementById(divName).appendChild(newrow);
             counter++;
         }
@@ -325,7 +334,7 @@ if (!isset($_SESSION['username']))
                                     echo "<td><input type=\"number\" name=\"numBottles[]\" size=\"2\" onchange=\"calculatePrice()\" min=\"1\" value=\"$orderItems_quantity\" required></td>\n";
                                     echo "<td>\n";
                                     echo "    <select name=\"bierselect[]\" onchange=\"calculatePrice()\">\n";
-                                    echo getBeertypeSelection();
+                                    echo getBeertypeSelection($orderItems_beerId);
                                     echo "    </select>\n";
                                     echo "</td>\n";
                                     echo "<td style=\"text-align:center\"><input type='hidden' value='0' name='giftselect[$orderItemIx]'><input type=\"checkbox\" name='giftselect[$orderItemIx]' value='1' onchange=\"calculatePrice()\" $checkedString /></td>\n";
@@ -335,7 +344,7 @@ if (!isset($_SESSION['username']))
                                 }
                                ?>
                             </table>
-                            <input type="button" value="+" onClick="addInput('ordertable');">
+                            <input type="button" value="+" onClick="addInput('ordertable', <?php echo $orderItemIx; ?>);">
                             <hr>
                             <input type='hidden' value='1' name='submitted'>
                             <p><input type="submit" value="Update"></p>
