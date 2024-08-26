@@ -61,7 +61,7 @@ function getBeertypeSelection()
 <html lang="en">
     <script>
     var counter = 1;
-    var limit = 50;
+    var limit = 8;
 
     function addInput(divName)
     {
