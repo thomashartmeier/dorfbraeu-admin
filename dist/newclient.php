@@ -48,8 +48,8 @@ if (!isset($_SESSION['username']))
 
                             $createDate = date("Y-m-d");
 
-                            $sql = "INSERT INTO clients (createDate,    prename,    lastname,    company,    isReseller,  email,    phone,    address,    billingAddress,    userId,  notes) VALUES
-                                                        ('$createDate', '$prename', '$lastname', '$company', $isReseller, '$email', '$phone', '$address', '$billingAddress', 0,       '$notes')";
+                            $sql = "INSERT INTO clients (createDate,    prename,    lastname,    company,    isReseller,  email,    phone,    address,    billingAddress,    userId,          notes) VALUES
+                                                        ('$createDate', '$prename', '$lastname', '$company', $isReseller, '$email', '$phone', '$address', '$billingAddress', $_SESSION['id'], '$notes')";
 
                             $query = mysqli_query($conn, $sql) or die("Could not run SQL query.");
 
@@ -64,7 +64,7 @@ if (!isset($_SESSION['username']))
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Neuer Kundeneintrag</h1>
                         <ul>
-                            <span style="color:gray"><li>Felder dürfen leergelassen werden (bzw. nachträglich ergänzt werden). Es muss aber mindestens Vor- oder Nachname ausgefüllt werden.</li></span>
+                            <span style="color:gray"><li>Felder dürfen leergelassen (bzw. nachträglich ergänzt) werden. Es muss aber mindestens Vor- oder Nachname ausgefüllt werden.</li></span>
                         </ul>
                         <form id="formIdentifier" method="POST" action="./newclient.php">
                             <table>
