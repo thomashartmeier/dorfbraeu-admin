@@ -50,7 +50,7 @@ if (!isset($_SESSION['username']))
                         $beerId = $_POST['beerId'];
 
                         // we need at least brew date and beer type
-                        if (empty($brewDate) || empty($beerId))
+                        if (empty($brewDate))
                         {
                             echo "<p style=\"background-color:#E6B7B1;\">Brauche mindestens Braudatum und Biertyp! <i class=\"bi bi-hand-thumbs-down-fill\"></i></p>";
                         }
@@ -59,7 +59,7 @@ if (!isset($_SESSION['username']))
                             // all good, we have valid form data and can create a new database entry
 
                             $bottleDate = $_POST['bottleDate'];
-                            $numBottles = $_POST['numBottles'];
+                            $numBottles = empty($_POST['numBottles']) ? 0 : $_POST['numBottles'];
                             $lotNumber = $_POST['lotNumber'];
                             $notes = $_POST['notes'];
 
