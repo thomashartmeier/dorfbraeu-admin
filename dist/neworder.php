@@ -235,7 +235,7 @@ if (!isset($_SESSION['username']))
                                         <label for="beertypes">Kunde:</label>
                                     </td>
                                     <td>
-                                        <select id="customers" name="customers">
+                                        <select id="customers" name="customers" onchange="calculatePrice()">
                                             <?php
                                             echo getCustomerSelection();
                                             ?>
