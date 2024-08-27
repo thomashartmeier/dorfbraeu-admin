@@ -87,8 +87,60 @@ if (!isset($_SESSION['username']))
 
     function calculatePrice()
     {
-        var number = Math.random()*10;
-        document.getElementById("calculatedPrice").innerHTML = number;
+        // count total number of bottles
+        let totalNumBottles = 0;
+
+        var numBottles = document.getElementsByName('numBottles[]');
+
+        for (var i = 0; i < numBottles.length; i++)
+        {
+            // get whether this selection of bottles is a gift
+            var giftselect = document.getElementsByName('giftselect['+i+']');
+
+            // only count if not tagged as gift
+            // (giftselect[0] is the hidden field, so we read giftselect[1])
+            if (!giftselect[1].checked)
+            {
+                totalNumBottles += Number(numBottles[i].value);
+            }
+        }
+
+        // get price per bottle
+        var pricePerBottle;
+
+        if (totalNumBottles > 239)
+        {
+            pricePerBottle = 3.25;
+        }
+        else if (totalNumBottles > 96)
+        {
+            pricePerBottle = 3.50;
+        }
+        else if (totalNumBottles > 23)
+        {
+            pricePerBottle = 3.75;
+        }
+        else
+        {
+            pricePerBottle = 4.00;
+        }
+
+        // check if client is reseller
+        var selectedIndex = document.getElementById('customers').selectedIndex;
+        var clientString = document.getElementById('customers').options[selectedIndex].text;
+        var isReseller = clientString.match(/\(\*\)/);
+
+        if (isReseller)
+        {
+            pricePerBottle -= 0.25;
+        }
+
+        // get number of crates
+        var numCrates = document.getElementById('numCrates').value;
+
+        var totalPrice = totalNumBottles*pricePerBottle + numCrates*10;
+
+        document.getElementById("calculatedPrice").innerHTML = totalPrice + "CHF";
     }
     </script>
     <?php include "./inc/head.html" ?>
