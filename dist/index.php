@@ -179,9 +179,12 @@ if (!isset($_SESSION['username']))
                     <?php
                     $bottlesBottled = getBottlesBottledCurrentYear(0);
 
+                    $cumulative = 0;
+
                     for ($week = 0; $week < 54; $week++)
                     {
-                        echo $bottlesBottled[$week];
+                        $cumulative += $bottlesBottled[$week];
+                        echo $cumulative;
                         echo ",";
                     }
                     ?>
@@ -203,9 +206,12 @@ if (!isset($_SESSION['username']))
                     <?php
                     $bottlesBottled = getBottlesBottledCurrentYear(1);
 
+                    $cumulative = 0;
+
                     for ($week = 0; $week < 54; $week++)
                     {
-                        echo $bottlesBottled[$week];
+                        $cumulative += $bottlesBottled[$week];
+                        echo $cumulative;
                         echo ",";
                     }
                     ?>
@@ -227,9 +233,12 @@ if (!isset($_SESSION['username']))
                     <?php
                     $bottlesBottled = getBottlesBottledCurrentYear(2);
 
+                    $cumulative = 0;
+
                     for ($week = 0; $week < 54; $week++)
                     {
-                        echo $bottlesBottled[$week];
+                        $cumulative += $bottlesBottled[$week];
+                        echo $cumulative;
                         echo ",";
                     }
                     ?>
@@ -251,9 +260,12 @@ if (!isset($_SESSION['username']))
                     <?php
                     $bottlesBottled = getBottlesBottledCurrentYear(3);
 
+                    $cumulative = 0;
+
                     for ($week = 0; $week < 54; $week++)
                     {
-                        echo $bottlesBottled[$week];
+                        $cumulative += $bottlesBottled[$week];
+                        echo $cumulative;
                         echo ",";
                     }
                     ?>
@@ -275,9 +287,12 @@ if (!isset($_SESSION['username']))
                     <?php
                     $bottlesBottled = getBottlesBottledCurrentYear(4);
 
+                    $cumulative = 0;
+
                     for ($week = 0; $week < 54; $week++)
                     {
-                        echo $bottlesBottled[$week];
+                        $cumulative += $bottlesBottled[$week];
+                        echo $cumulative;
                         echo ",";
                     }
                     ?>
@@ -343,9 +358,12 @@ if (!isset($_SESSION['username']))
                     <?php
                     $bottlesSold = getBottlesSoldCurrentYear(0);
 
+                    $cumulative = 0;
+
                     for ($week = 0; $week < 54; $week++)
                     {
-                        echo $bottlesSold[$week];
+                        $cumulative += $bottlesSold[$week];
+                        echo $cumulative;
                         echo ",";
                     }
                     ?>
@@ -367,9 +385,12 @@ if (!isset($_SESSION['username']))
                     <?php
                     $bottlesSold = getBottlesSoldCurrentYear(1);
 
+                    $cumulative = 0;
+
                     for ($week = 0; $week < 54; $week++)
                     {
-                        echo $bottlesSold[$week];
+                        $cumulative += $bottlesSold[$week];
+                        echo $cumulative;
                         echo ",";
                     }
                     ?>
@@ -391,9 +412,12 @@ if (!isset($_SESSION['username']))
                     <?php
                     $bottlesSold = getBottlesSoldCurrentYear(2);
 
+                    $cumulative = 0;
+
                     for ($week = 0; $week < 54; $week++)
                     {
-                        echo $bottlesSold[$week];
+                        $cumulative += $bottlesSold[$week];
+                        echo $cumulative;
                         echo ",";
                     }
                     ?>
@@ -415,9 +439,12 @@ if (!isset($_SESSION['username']))
                     <?php
                     $bottlesSold = getBottlesSoldCurrentYear(3);
 
+                    $cumulative = 0;
+
                     for ($week = 0; $week < 54; $week++)
                     {
-                        echo $bottlesSold[$week];
+                        $cumulative += $bottlesSold[$week];
+                        echo $cumulative;
                         echo ",";
                     }
                     ?>
@@ -439,9 +466,12 @@ if (!isset($_SESSION['username']))
                     <?php
                     $bottlesSold = getBottlesSoldCurrentYear(4);
 
+                    $cumulative = 0;
+
                     for ($week = 0; $week < 54; $week++)
                     {
-                        echo $bottlesSold[$week];
+                        $cumulative += $bottlesSold[$week];
+                        echo $cumulative;
                         echo ",";
                     }
                     ?>
