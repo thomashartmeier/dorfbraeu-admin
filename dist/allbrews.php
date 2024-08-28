@@ -76,7 +76,7 @@ if (!isset($_SESSION['username']))
 
                                             echo "    <td>$res_bottleDate</td>\n";
                                             echo "    <td>$res_numBottles</td>\n";
-                                            echo "    <td>$res_lotNumber</td>\n";
+                                            echo "    <td><pre>$res_lotNumber</pre></td>\n";
                                             echo "    <td>$res_notes</td>\n";
 
                                             // allow edit for all users
