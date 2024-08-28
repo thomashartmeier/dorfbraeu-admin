@@ -241,6 +241,7 @@ if (!isset($_SESSION['username']))
                                             ?>
                                         </select>
                                         <ul>
+                                            <span style="color:gray"><li>Falls der Kunde noch nicht in der Liste ist, muss er zuerst unter <a href="./newclient.php">Neuer Kundeneintrag</a> dazugefügt werden.</li></span>
                                             <span style="color:gray"><li>(*) Kunde ist Wiederverkäufer</li></span>
                                         </ul>
                                     </td>
