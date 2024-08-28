@@ -204,8 +204,12 @@ if (!isset($_SESSION['username']))
                             }
                         }
 
-                        // if we have any non-gift item, we need a payment and therefore the payment status is set to 'open'
-                        $paymentStatusId = ($anyNonGift == 1) ? 0 : 1;
+                        // if payment status is set to 'open', we might be able to set it to 'done' in case of just gifts
+                        if ($paymentStatusId == 0)
+                        {
+                            // if we have any non-gift item, we need a payment and therefore the payment status is set to 'open'
+                            $paymentStatusId = ($anyNonGift == 1) ? 0 : 1;
+                        }
 
                         $sqlUpdate = "UPDATE orders SET clientId = $client, paymentMethod = $paymentMethod, deliveryStatusId = $deliveryStatusId, invoiceStatusId = $invoiceStatusId, paymentStatusId = $paymentStatusId, bankaccountStatusId = $bankaccountStatusId, price = $price, numCrates = $numCrates, notes = '$notes' WHERE id = $orderId";
 
