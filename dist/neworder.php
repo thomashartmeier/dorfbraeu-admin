@@ -62,7 +62,8 @@ if (!isset($_SESSION['username']))
 <html lang="en">
     <script>
     var counter = 1;
-    var limit = 8;
+    // we have 5 different styles of beer so we need 10 (because we can have gift or no-gift)
+    var limit = 10;
 
     function addInput(divName)
     {
