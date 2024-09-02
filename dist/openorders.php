@@ -23,7 +23,7 @@ if (!isset($_SESSION['username']))
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Offene Bestellungen</h1>
                         <ul>
-                            <span style="color:gray"><li>Bestellungen können nur von der Person editiert werden, die die entsprechende Bestellung erstellt hat.</li></span>
+                            <span style="color:gray"><li>Bestellungen können nur von der Person editiert werden, die die entsprechende Bestellung erstellt hat oder von der Person, die zuständig für den Rechnungsversand ist.</li></span>
                         </ul>
                         <div class="card mb-4">
                             <div class="card-header">
@@ -211,8 +211,12 @@ if (!isset($_SESSION['username']))
                                             echo "    </td>\n";
                                             echo "    <td>$res_notes</td>\n";
 
+                                            // allow editing this order for the person that created this order and for the person that is
+                                            // handing out the invoices
+                                            $allowEdit = (($_SESSION['id'] == $res_userId) || ($_SESSION['id'] == 1));
+
                                             // only allow edit for user who created this order
-                                            if ($res_userId == $_SESSION['id'])
+                                            if ($allowEdit)
                                             {
                                                 echo "    <td><a href=\"editorder.php?orderid=$res_id\">edit</a></td>\n";
                                             }
