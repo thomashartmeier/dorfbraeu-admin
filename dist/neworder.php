@@ -76,7 +76,7 @@ if (!isset($_SESSION['username']))
             var newrow = document.createElement("tr");
             newrow.innerHTML  = "<td><input type='number' name='numBottles[]' size='2' onchange='calculatePrice()' min='1' required></td>\n \
             <td>\n \
-                <select name='bierselect[]' onchange='calculatePrice()'><?php echo getBeertypeSelection(); ?>\n \
+                <select name='bierselect[]' onchange='calculatePrice()' required><option value=''>Biersorte auswählen...</option><?php echo getBeertypeSelection(); ?>\n \
                 </select>\n \
             </td>\n \
             <td style=\"text-align:center\"><input type='hidden' value='0' name='giftselect[" + counter + "]'><input type='checkbox' name='giftselect[" + counter + "]' value='1' onchange='calculatePrice()' /></td>";
@@ -236,7 +236,8 @@ if (!isset($_SESSION['username']))
                                         <label for="beertypes">Kunde:</label>
                                     </td>
                                     <td>
-                                        <select id="customers" name="customers" onchange="calculatePrice()">
+                                        <select id="customers" name="customers" onchange="calculatePrice()" required>
+                                            <option value="">Kunde auswählen...</option>
                                             <?php
                                             echo getCustomerSelection();
                                             ?>
@@ -270,7 +271,8 @@ if (!isset($_SESSION['username']))
                                 <tr valign="top">
                                     <td>Bezahlart:</td>
                                     <td>
-                                        <select name="paymentMethod">
+                                        <select name="paymentMethod" required>
+                                            <option value="">Bezahlart auswählen...</option>
                                             <option value='0' size='2'>Kunde bezahlt direkt an dich (bar, Twint, ...)</option>
                                             <option value='1' size='2'>Kunde bezahlt via Rechnung</option>
                                         </select>
@@ -293,7 +295,8 @@ if (!isset($_SESSION['username']))
                                 <tr name="orderItem[]">
                                     <td><input type="number" name="numBottles[]" size="2" onchange="calculatePrice()" min="1" required></td>
                                     <td>
-                                        <select name="bierselect[]" onchange="calculatePrice()">
+                                        <select name="bierselect[]" onchange="calculatePrice()" required>
+                                            <option value="">Biersorte auswählen...</option>
                                             <?php
                                             echo getBeertypeSelection();
                                             ?>

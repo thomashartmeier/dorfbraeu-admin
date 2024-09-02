@@ -92,7 +92,8 @@ if (!isset($_SESSION['username']))
                                 <tr valign="top">
                                     <td>Biersorte:</td>
                                     <td>
-                                        <select name="beerId">
+                                        <select name="beerId" required>
+                                            <option value="">Biersorte auswählen...</option>
                                             <?php
                                             echo getBeertypeSelection();
                                             ?>
