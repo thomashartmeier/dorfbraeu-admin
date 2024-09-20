@@ -53,14 +53,16 @@ if (!isset($_SESSION['username']))
 
                                         while ($result = mysqli_fetch_assoc($query))
                                         {
-                                            $res_orderNumber = $result['orderNumber'];
                                             $res_id = $result['id'];
+                                            $res_orderNumber = $result['orderNumber'];
                                             $res_date = $result['createDate'];
                                             $res_userId = $result['userId'];
                                             $res_clientId = $result['clientId'];
+                                            $res_paymentMethod = $result['paymentMethod'];
                                             $res_price = $result['price'];
                                             $res_numCrates = $result['numCrates'];
                                             $res_deliveryStatusId = $result['deliveryStatusId'];
+                                            $res_invoiceStatusId = $result['invoiceStatusId'];
                                             $res_paymentStatusId = $result['paymentStatusId'];
                                             $res_bankaccountStatusId = $result['bankaccountStatusId'];
                                             $res_notes = $result['notes'];
