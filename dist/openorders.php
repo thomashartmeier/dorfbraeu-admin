@@ -199,13 +199,18 @@ if (!isset($_SESSION['username']))
                                                 {
                                                     echo "        <li><i style=\"color:red;\" class=\"bi bi-x\"></i>noch nicht bezahlt</li>\n";
                                                 }
-                                                if ($res_bankaccountStatusId == 1)
+                                                // bank account status
+                                                // only care about bank account status if payment method is not invoice (!=1)
+                                                if ($res_paymentMethod != 1)
                                                 {
-                                                    echo "        <li><i style=\"color:green;\" class=\"bi bi-check\"></i>Geld auf Konto</li>\n";
-                                                }
-                                                else
-                                                {
-                                                    echo "        <li><i style=\"color:red;\" class=\"bi bi-x\"></i>Geld noch nicht auf Konto</li>\n";
+                                                    if ($res_bankaccountStatusId == 1)
+                                                    {
+                                                        echo "        <li><i style=\"color:green;\" class=\"bi bi-check\"></i>Geld auf Konto</li>\n";
+                                                    }
+                                                    else
+                                                    {
+                                                        echo "        <li><i style=\"color:red;\" class=\"bi bi-x\"></i>Geld noch nicht auf Konto</li>\n";
+                                                    }
                                                 }
                                             }
 
