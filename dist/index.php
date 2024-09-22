@@ -637,6 +637,7 @@ if (!isset($_SESSION['username']))
                                             $res_clientId = $result['id'];
                                             $res_prename = $result['prename'];
                                             $res_lastname = $result['lastname'];
+                                            $res_company = $result['company'];
 
                                             // get all orders for this client
                                             $sqlOrders = "SELECT * FROM orders WHERE clientId = $res_clientId";
@@ -659,8 +660,15 @@ if (!isset($_SESSION['username']))
                                                 $clientCrates += $res_numCrates;
                                             }
 
+                                            $companyString = '';
+
+                                            if ($res_company != '')
+                                            {
+                                                $companyString = " ($res_company)";
+                                            }
+
                                             echo "<tr>\n";
-                                            echo "    <td>$res_prename $res_lastname</td>\n";
+                                            echo "    <td>$res_prename ${res_lastname}${companyString}</td>\n";
                                             echo "    <td>$clientQuantity</td>\n";
                                             echo "    <td>$clientCrates</td>\n";
                                             echo "</tr>\n";

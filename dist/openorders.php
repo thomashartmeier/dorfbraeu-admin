@@ -83,7 +83,16 @@ if (!isset($_SESSION['username']))
                                             $queryClient = mysqli_query($conn, $sqlClient) or die("Could not run SQL query.");
                                             $resultClient = mysqli_fetch_assoc($queryClient);
                                             $clientName = $resultClient['prename']." ".$resultClient['lastname'];
-                                            echo "    <td>$clientName</td>\n";
+                                            $clientCompany = $resultClient['company'];
+
+                                            if ($clientCompany != '')
+                                            {
+                                                echo "    <td>$clientName ($clientCompany)</td>\n";
+                                            }
+                                            else
+                                            {
+                                                echo "    <td>$clientName</td>\n";
+                                            }
 
                                             // get all the order items that belong to that order
                                             $sqlItem = "SELECT * FROM orderItems WHERE orderId = $res_id";
