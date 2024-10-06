@@ -58,7 +58,7 @@ if (!isset($_SESSION['username']))
                         $beerId = $_POST['beerId'];
 
                         // we need at least brew date and beer type
-                        if (empty($brewDate) || empty($beerId))
+                        if (empty($brewDate))
                         {
                             echo "<p style=\"background-color:#E6B7B1;\">Brauche mindestens Braudatum und Biertyp! <i class=\"bi bi-hand-thumbs-down-fill\"></i></p>";
                         }
