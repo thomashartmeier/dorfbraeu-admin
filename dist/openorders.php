@@ -48,7 +48,14 @@ if (!isset($_SESSION['username']))
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $sql = "SELECT * FROM orders WHERE deliveryStatusId=0 OR (paymentMethod=1 AND invoiceStatusId=0) OR paymentStatusId=0 OR bankaccountStatusId=0";
+                                        # - if the payment method is invoice (paymentMethod == 1), we want to list orders
+                                        #   which are not delivered yet as well as orders where the invoice is not sent out yet
+                                        # - if the payment method is non-invoice (paymentMethod == 0), we want to list orders
+                                        #   which are not delivered yet, not payed yet or not yet on bankaccount
+                                        $sql = "SELECT * FROM orders WHERE deliveryStatusId=0 OR                         # not delivered yet
+                                                                           (paymentMethod=1 AND invoiceStatusId=0) OR    # invoice payment + invoice not sent out yet
+                                                                           (paymentMethod=0 AND paymentStatusId=0) OR    # non-invoice payment + not payed yet
+                                                                           (paymentMethod=0 AND bankaccountStatusId=0)"; # non-invoice payment + not on bank account yet
                                         $query = mysqli_query($conn, $sql) or die("Could not run SQL query.");
 
                                         while ($result = mysqli_fetch_assoc($query))
