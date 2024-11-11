@@ -200,13 +200,18 @@ if (!isset($_SESSION['username']))
                                             // any orderitem which is not a gift?
                                             if ($anyNonGift == 1)
                                             {
-                                                if ($res_paymentStatusId == 1)
+                                                // payment status
+                                                // only care about payment status if payment method is not invoice (!=1)
+                                                if ($res_paymentMethod != 1)
                                                 {
-                                                    echo "        <li><i style=\"color:green;\" class=\"bi bi-check\"></i>bezahlt</li>\n";
-                                                }
-                                                else
-                                                {
-                                                    echo "        <li><i style=\"color:red;\" class=\"bi bi-x\"></i>noch nicht bezahlt</li>\n";
+                                                    if ($res_paymentStatusId == 1)
+                                                    {
+                                                        echo "        <li><i style=\"color:green;\" class=\"bi bi-check\"></i>bezahlt</li>\n";
+                                                    }
+                                                    else
+                                                    {
+                                                        echo "        <li><i style=\"color:red;\" class=\"bi bi-x\"></i>noch nicht bezahlt</li>\n";
+                                                    }
                                                 }
                                                 // bank account status
                                                 // only care about bank account status if payment method is not invoice (!=1)
