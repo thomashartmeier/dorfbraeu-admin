@@ -8161,6 +8161,10 @@ textarea.form-control-lg {
   background-color: #b746aa;
 }
 
+.bg-barleywine {
+  background-color: #3d5588;
+}
+
 .bg-primary {
   --bs-bg-opacity: 1;
   background-color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity)) !important;

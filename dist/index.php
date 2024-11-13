@@ -297,6 +297,33 @@ if (!isset($_SESSION['username']))
                     }
                     ?>
                     ],
+                },
+                {
+                label: "Flaschen Barley Wine",
+                lineTension: 0.3,
+                backgroundColor: "rgba(255,255,255,0)",
+                borderColor: "rgba(61, 85, 136, 1)",
+                pointRadius: 5,
+                pointBackgroundColor: "rgba(61, 85, 136, 1)",
+                pointBorderColor: "rgba(255,255,255,0.8)",
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(61, 85, 136, 1)",
+                pointHitRadius: 50,
+                pointBorderWidth: 2,
+                data: [
+                    <?php
+                    $bottlesBottled = getBottlesBottledCurrentYear(5);
+
+                    $cumulative = 0;
+
+                    for ($week = 0; $week < 54; $week++)
+                    {
+                        $cumulative += $bottlesBottled[$week];
+                        echo $cumulative;
+                        echo ",";
+                    }
+                    ?>
+                    ],
                 }],
             },
             options: {
@@ -476,6 +503,33 @@ if (!isset($_SESSION['username']))
                     }
                     ?>
                     ],
+                },
+                {
+                label: "Flaschen Barley Wine",
+                lineTension: 0.3,
+                backgroundColor: "rgba(255,255,255,0)",
+                borderColor: "rgba(61, 85, 136, 1)",
+                pointRadius: 5,
+                pointBackgroundColor: "rgba(61, 85, 136, 1)",
+                pointBorderColor: "rgba(255,255,255,0.8)",
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(61, 85, 136, 1)",
+                pointHitRadius: 50,
+                pointBorderWidth: 2,
+                data: [
+                    <?php
+                    $bottlesSold = getBottlesSoldCurrentYear(5);
+
+                    $cumulative = 0;
+
+                    for ($week = 0; $week < 54; $week++)
+                    {
+                        $cumulative += $bottlesSold[$week];
+                        echo $cumulative;
+                        echo ",";
+                    }
+                    ?>
+                    ],
                 }],
             },
             options: {
@@ -580,6 +634,18 @@ if (!isset($_SESSION['username']))
                                             <li>Stock: <?php echo getBottlesRemaining(1); ?> Flaschen</li>
                                             <li>Total gebraut: <?php echo getBottlesBrewed(1); ?> Flaschen</li>
                                             <li>Total verkauft+verschenkt: <?php echo getBottlesSold(1); ?> Flaschen</li>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-6">
+                                <div class="card bg-barleywine text-white mb-4">
+                                    <div class="card-body"><b>Barley Wine</b></div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <span style="font-size: 0.75rem">
+                                            <li>Stock: <?php echo getBottlesRemaining(5); ?> Flaschen</li>
+                                            <li>Total gebraut: <?php echo getBottlesBrewed(5); ?> Flaschen</li>
+                                            <li>Total verkauft+verschenkt: <?php echo getBottlesSold(5); ?> Flaschen</li>
                                         </span>
                                     </div>
                                 </div>
