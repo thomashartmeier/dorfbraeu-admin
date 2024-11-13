@@ -121,6 +121,7 @@ if (!isset($_SESSION['username']))
                                                 $queryBeer = mysqli_query($conn, $sqlBeer) or die("Could not run SQL query.");
                                                 $resultBeer = mysqli_fetch_assoc($queryBeer);
                                                 $beerType = $resultBeer['type'];
+                                                $beerColor = $resultBeer['color'];
 
                                                 $container = ($orderItems_containerId == 0) ? "Fl." : "Keg";
                                                 $gift = ($orderItems_gift == 1) ? "<i class=\"bi bi-gift-fill\"></i>" : "";
@@ -130,27 +131,7 @@ if (!isset($_SESSION['username']))
                                                     $anyNonGift = 1;
                                                 }
 
-                                                switch($beerType)
-                                                {
-                                                    case "Lovely Amber":
-                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #f46a1e; border-radius: 50%; display: inline-block;\"></span> $orderItems_quantity $container $beerType $gift</li>\n";
-                                                        break;
-                                                    case "Funky IPA":
-                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #4cc070; border-radius: 50%; display: inline-block;\"></span> $orderItems_quantity $container $beerType $gift</li>\n";
-                                                        break;
-                                                    case "Frisches Mais":
-                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #e8e004; border-radius: 50%; display: inline-block;\"></span> $orderItems_quantity $container $beerType $gift</li>\n";
-                                                        break;
-                                                    case "Freaky Craft":
-                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #ed1c24; border-radius: 50%; display: inline-block;\"></span> $orderItems_quantity $container $beerType $gift</li>\n";
-                                                        break;
-                                                    case "Volles Dinkel":
-                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #b746aa; border-radius: 50%; display: inline-block;\"></span> $orderItems_quantity $container $beerType $gift</li>\n";
-                                                        break;
-                                                    default:
-                                                        echo "    <li><span style=\"height: 15px; width: 15px; background-color: #ffffff; border-radius: 50%; display: inline-block;\"></span> $orderItems_quantity $container $beerType $gift</li>\n";
-                                                        break;
-                                                }
+                                                echo "    <li><span style=\"height: 15px; width: 15px; background-color: $beerColor; border-radius: 50%; display: inline-block;\"></span> $orderItems_quantity $container $beerType $gift</li>\n";
                                             }
 
                                             if ($res_numCrates > 1 || $res_numCrates < -1)
