@@ -214,9 +214,10 @@ if (!isset($_SESSION['username']))
                                             echo "    <td>$res_notes</td>\n";
 
                                             // allow editing this order for the person that created this order and for the person that is
-                                            // handing out the invoices
-                                            $allowEdit = (($_SESSION['id'] == $res_userId) || ($_SESSION['id'] == 1));
+                                            // handing out the invoices and for the person that is handing out the orders
+                                            $allowEdit = (($_SESSION['id'] == $res_userId) || ($_SESSION['id'] == 1) || ($_SESSION['id'] == 2));
 
+                                            // only allow edit if aboth condition holds
                                             if ($allowEdit)
                                             {
                                                 echo "    <td><a href=\"editorder.php?orderid=$res_id\">edit</a></td>\n";

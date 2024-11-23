@@ -258,9 +258,10 @@ if (!isset($_SESSION['username']))
                     }
 
                     // allow editing this order for the person that created this order and for the person that is
-                    // handing out the invoices
-                    $allowEdit = (($_SESSION['id'] == $order_userId) || ($_SESSION['id'] == 1));
+                    // handing out the invoices and for the person that is handing out the orders
+                    $allowEdit = (($_SESSION['id'] == $order_userId) || ($_SESSION['id'] == 1) || ($_SESSION['id'] == 2));
 
+                    // only allow edit if aboth condition holds
                     if (!$allowEdit)
                     {
                         echo "<p style=\"background-color:#E6B7B1;\">Du darfst diese Bestellung nicht editieren! <i class=\"bi bi-hand-thumbs-down-fill\"></i></p>";
