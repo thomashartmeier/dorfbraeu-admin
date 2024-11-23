@@ -25,6 +25,7 @@ if (!isset($_SESSION['username']))
                         <ul>
                             <span style="color:gray"><li>Grundsätzlich wollen wir unsere Sude auf <a href="https://brauen.online">brauen.online</a> protokollieren. Jedoch ist es hilfreich auch in diesem Tool v.a. die Anzahl abgefüllter Flaschen zu haben, sodass wir einen Überblick haben können (siehe <a href="./index.php">Dashboard</a>), wieviele Flaschen wir noch pro Sorte haben.</li></span>
                             <span style="color:gray"><li>Anders als bei den Kunden und Bestellungen können hier alle die Sude/Abfüllungen Einträge editieren (da es häufig vorkommen wird, dass jemand anders abfüllt als gebraut hat).</li></span>
+                            <span style="color:gray"><li>Haltbarkeitsdatum: Barley Wine 12 Monate ab Braudatum, alle anderen 8 Monate ab Braudatum.</li></span>
                         </ul>
                         <div class="card mb-4">
                             <div class="card-header">
