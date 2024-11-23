@@ -89,7 +89,7 @@ if (!isset($_SESSION['username']))
 
                                             echo "    <td>$res_notes</td>\n";
 
-                                            // only allow edit for user who created this order
+                                            // only allow edit for user who added this client
                                             if ($res_userId == $_SESSION['id'])
                                             {
                                                 echo "    <td><a href=\"editclient.php?clientid=$res_id\">edit</a></td>\n";
