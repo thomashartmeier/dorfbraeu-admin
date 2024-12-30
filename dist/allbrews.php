@@ -49,7 +49,7 @@ if (!isset($_SESSION['username']))
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $sql = "SELECT * FROM brews WHERE id > 0";
+                                        $sql = "SELECT * FROM brews WHERE id > 0 ORDER BY brewDate DESC";
                                         $query = mysqli_query($conn, $sql) or die("Could not run SQL query.");
 
                                         while ($result = mysqli_fetch_assoc($query))

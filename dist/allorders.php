@@ -48,7 +48,7 @@ if (!isset($_SESSION['username']))
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $sql = "SELECT * FROM orders";
+                                        $sql = "SELECT * FROM orders ORDER BY createDate DESC";
                                         $query = mysqli_query($conn, $sql) or die("Could not run SQL query.");
 
                                         while ($result = mysqli_fetch_assoc($query))

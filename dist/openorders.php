@@ -55,7 +55,8 @@ if (!isset($_SESSION['username']))
                                         $sql = "SELECT * FROM orders WHERE deliveryStatusId=0 OR                         # not delivered yet
                                                                            (paymentMethod=1 AND invoiceStatusId=0) OR    # invoice payment + invoice not sent out yet
                                                                            (paymentMethod=0 AND paymentStatusId=0) OR    # non-invoice payment + not payed yet
-                                                                           (paymentMethod=0 AND bankaccountStatusId=0)"; # non-invoice payment + not on bank account yet
+                                                                           (paymentMethod=0 AND bankaccountStatusId=0)   # non-invoice payment + not on bank account yet
+                                                                           ORDER BY createDate DESC";
                                         $query = mysqli_query($conn, $sql) or die("Could not run SQL query.");
 
                                         while ($result = mysqli_fetch_assoc($query))
