@@ -348,7 +348,7 @@ if (!isset($_SESSION['username']))
                                         <input name="numCrates" type="number" id="numCrates" size="2" onchange="calculatePrice()" value="<?php echo $order_numCrates;?>" required>
                                         <ul>
                                             <span style="color:gray"><li>Die hier eingetragene Anzahl Harasse soll der Menge "gelieferter minus zurückerhaltener" bei erfolgter Auslieferung entsprechen. Wichtig: Da es sein kann, dass bei der Auslieferung mehr Harasse zurückgekommen sind (von früheren Aufträgen) als ausgeliefert, kann dieses Feld auch negativ sein! Die Anzahl Harasse, die uns ein Kunde noch schuldet, kann im <a href="index.php">Dashboard</a> nachgeschaut werden.</li></span>
-                                            <span style="color:gray"><li>Falls der Kunde nach einer Weile einfach den/die Harass(e) zurückgibt ohne eine neue Bestellung aufzugeben, kann seine letzte Bestellung editiert werden und dort das Feld "Anzahl Harasse" auf 0 gesetzt werden.</li></span>
+                                            <span style="color:gray"><li>Falls der Kunde nach einer Weile einfach den/die Harass(e) zurückgibt ohne eine neue Bestellung aufzugeben, kann entweder seine letzte Bestellung editiert und dort das Feld "Anzahl Harasse" auf 0 gesetzt werden oder es wird eine neue "Bestellung" erstellt, bei der unter "Anzahl Harasse" z.B. "-3" eingetragen wird (wenn er 3 Harasse zurückgegeben hat) und die Bestellung kann mit 0 Flaschen Bier erstellt werden.</li></span>
                                         </ul>
                                     </td>
                                 </tr>
