@@ -74,7 +74,7 @@ if (!isset($_SESSION['username']))
         else
         {
             var newrow = document.createElement("tr");
-            newrow.innerHTML  = "<td><input type='number' name='numBottles[]' size='2' onchange='calculatePrice()' min='1' required></td>\n \
+            newrow.innerHTML  = "<td><input type='number' name='numBottles[]' size='2' onchange='calculatePrice()' min='0' required></td>\n \
             <td>\n \
                 <select name='bierselect[]' onchange='calculatePrice()' required><option value=''>Biersorte auswählen...</option><?php echo getBeertypeSelection(); ?>\n \
                 </select>\n \
@@ -293,7 +293,7 @@ if (!isset($_SESSION['username']))
                                     <th>Geschenk</th>
                                 </tr>
                                 <tr name="orderItem[]">
-                                    <td><input type="number" name="numBottles[]" size="2" onchange="calculatePrice()" min="1" required></td>
+                                    <td><input type="number" name="numBottles[]" size="2" onchange="calculatePrice()" min="0" required></td>
                                     <td>
                                         <select name="bierselect[]" onchange="calculatePrice()" required>
                                             <option value="">Biersorte auswählen...</option>

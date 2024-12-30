@@ -90,7 +90,7 @@ if (!isset($_SESSION['username']))
         else
         {
             var newrow = document.createElement("tr");
-            newrow.innerHTML  = "<td><input type='number' name='numBottles[]' size='2' onchange='calculatePrice()' min='1' required></td>\n \
+            newrow.innerHTML  = "<td><input type='number' name='numBottles[]' size='2' onchange='calculatePrice()' min='0' required></td>\n \
             <td>\n \
                 <select name='bierselect[]' onchange='calculatePrice()'><?php echo getBeertypeSelection(0); ?>\n \
                 </select>\n \
@@ -392,7 +392,7 @@ if (!isset($_SESSION['username']))
                                     $checkedString = $orderItems_gift ? "checked" : "";
 
                                     echo "<tr name=\"orderItem[]\">\n";
-                                    echo "<td><input type=\"number\" name=\"numBottles[]\" size=\"2\" onchange=\"calculatePrice()\" min=\"1\" value=\"$orderItems_quantity\" required></td>\n";
+                                    echo "<td><input type=\"number\" name=\"numBottles[]\" size=\"2\" onchange=\"calculatePrice()\" min=\"0\" value=\"$orderItems_quantity\" required></td>\n";
                                     echo "<td>\n";
                                     echo "    <select name=\"bierselect[]\" onchange=\"calculatePrice()\">\n";
                                     echo getBeertypeSelection($orderItems_beerId);
